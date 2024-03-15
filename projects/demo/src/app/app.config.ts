@@ -10,7 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideFormFiller(withOpenAIBackend({
-      baseUrl: 'http://localhost:4200/api/openai/',
+      baseURL: 'http://localhost:4200/api/openai/',
     })),
   ]
 };

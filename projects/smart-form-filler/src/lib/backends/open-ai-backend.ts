@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import OpenAI from 'openai';
 import { CompletedFormField } from '../completed-form-field';
 import { FormField } from '../form-field';
+import { InferenceOptions } from '../inference-options';
 import { ModelBackend } from '../model-backend';
 import { OPEN_AI_CONFIG } from './open-ai-config';
 
@@ -9,29 +10,29 @@ import { OPEN_AI_CONFIG } from './open-ai-config';
 export class OpenAIBackend implements ModelBackend {
   private readonly config = inject(OPEN_AI_CONFIG);
 
-  async getCompletions(fields: FormField[], userData: string): Promise<CompletedFormField[]> {
+  async getCompletions(fields: FormField[], userData: string, options?: InferenceOptions): Promise<CompletedFormField[]> {
     const systemPrompt = this.getSystemPrompt(fields);
     const userPrompt = `USER_DATA: ${userData}`;
     const openAI = new OpenAI({
-      baseURL: this.config.baseUrl,
+      baseURL: this.config.baseURL,
       // The OpenAI SDK refuses to send requests without an API key set, so we are faking one here.
       apiKey: 'FAKE',
       dangerouslyAllowBrowser: true,
     });
     const response = await openAI.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: options?.model ?? 'gpt-3.5-turbo',
       messages: [
         { content: systemPrompt, role: 'system' },
         { content: userPrompt, role: 'user' },
       ],
-      'max_tokens': 2000,
-      "temperature": 0,
-      "top_p": 1,
-      "stop": [
+      temperature: options?.temperature ?? 0,
+      stop: [
         "END_RESPONSE",
       ],
-      "presence_penalty": 0,
-      "frequency_penalty": 0.1,
+      'max_tokens': 2000,
+      'top_p': 1,
+      'presence_penalty': 0,
+      'frequency_penalty': 0.1,
     });
     return (response.choices[0].message.content ?? '')
       .split('\n')
@@ -39,8 +40,7 @@ export class OpenAIBackend implements ModelBackend {
         // For compatibility with OpenAI-compatible local models (which may behave differently than GPT-3.5), this regex
         // a) ignores any whitespace before the first FIELD, as local models may add it
         // b) accepts at least three circumflex (^) characters, as local models may return more
-        // c) omits the END_RESPONSE stop word, as local models may return it
-        const [, key, value] = /\s*FIELD\s(.*?)\^\^\^+(.*?)(END_RESPONSE)?$/g.exec(resultLine) ?? [];
+        const [, key, value] = /\s*FIELD\s(.*?)\^{3,}(.*)/g.exec(resultLine) ?? [];
         return { key, value };
       }).filter(({ value }) => value !== 'NO_DATA');
   }
