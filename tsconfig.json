@@ -15,7 +15,11 @@
     "declaration": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "paths": {},
+    "paths": {
+      "smart-form-filler": [
+        "./dist/smart-form-filler"
+      ]
+    },
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
