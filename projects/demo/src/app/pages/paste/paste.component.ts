@@ -43,6 +43,7 @@ export class PasteComponent {
       addressLine2: 'Line 2'
     });
     const completions = await this.formFiller.getCompletions(fields, userData);
+    this.formGroup.reset();
     completions.forEach(({ key, value }) => this.formGroup.get(key)?.setValue(value));
   }
 }
