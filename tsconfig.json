@@ -15,6 +15,11 @@
     "declaration": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
+    "paths": {
+      "paste": [
+        "./dist/paste"
+      ]
+    },
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
