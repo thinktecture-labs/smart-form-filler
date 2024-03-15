@@ -36,10 +36,8 @@ export class OpenAiBrowserBackend implements ModelBackend {
     return (response.choices[0].message.content ?? '')
       .split('\n')
       .map(resultLine => {
-        // TODO: REGEX
-        const resultWithoutPrefix = resultLine.trim().replace(/^FIELD\ /g, '');
-        const [key, value] = resultWithoutPrefix.split('^^^');
-        return ({ key, value });
+        const [, key, value] = /\s*FIELD (.*?)\^\^\^+(.*)/g.exec(resultLine) ?? [];
+        return { key, value };
       }).filter(({ value }) => value !== 'NO_DATA');
   }
 
