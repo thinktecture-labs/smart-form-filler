@@ -6,7 +6,7 @@ import { ModelBackend } from '../model-backend';
 import { OPEN_AI_CONFIG } from './open-ai-config';
 
 @Injectable()
-export class OpenAiBrowserBackend implements ModelBackend {
+export class OpenAIBackend implements ModelBackend {
   private readonly config = inject(OPEN_AI_CONFIG);
 
   async getCompletions(fields: FormField[], userData: string): Promise<CompletedFormField[]> {
@@ -46,7 +46,7 @@ export class OpenAiBrowserBackend implements ModelBackend {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
     const fieldString = fields
       .map(({ key, description, type }) => `FIELD ${key}^^^The ${description ?? key} of type ${type}`)
