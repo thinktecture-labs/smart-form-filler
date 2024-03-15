@@ -1,0 +1,11 @@
+.group {
+  display: flex;
+}
+
+.segment {
+  flex: 1;
+}
+
+mat-form-field {
+  display: block;
+}

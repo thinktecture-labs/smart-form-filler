@@ -1,1 +1,50 @@
-<p>paste works!</p>
+<form class="group" [formGroup]="formGroup">
+  <div class="segment">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone Number</mat-label>
+      <input matInput formControlName="phoneNumber">
+    </mat-form-field>
+  </div>
+  <div class="segment">
+    <mat-form-field>
+      <mat-label>Line 1</mat-label>
+      <input matInput formControlName="addressLine1">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Line 2</mat-label>
+      <input matInput formControlName="addressLine2">
+    </mat-form-field>
+    <div class="group">
+      <div class="segment">
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>State</mat-label>
+          <input matInput formControlName="state">
+        </mat-form-field>
+      </div>
+      <div class="segment">
+        <mat-form-field>
+          <mat-label>Zip</mat-label>
+          <input matInput formControlName="zip">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Country</mat-label>
+          <input matInput formControlName="country">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</form>
+
+{{ formGroup.value | json }}
