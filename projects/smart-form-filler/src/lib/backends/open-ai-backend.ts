@@ -36,7 +36,11 @@ export class OpenAIBackend implements ModelBackend {
     return (response.choices[0].message.content ?? '')
       .split('\n')
       .map(resultLine => {
-        const [, key, value] = /\s*FIELD (.*?)\^\^\^+(.*)/g.exec(resultLine) ?? [];
+        // For compatibility with OpenAI-compatible local models (which may behave differently than GPT-3.5), this regex
+        // a) ignores any whitespace before the first FIELD, as local models may add it
+        // b) accepts at least three circumflex (^) characters, as local models may return more
+        // c) omits the END_RESPONSE stop word, as local models may return it
+        const [, key, value] = /\s*FIELD\s(.*?)\^\^\^+(.*?)(END_RESPONSE)?$/g.exec(resultLine) ?? [];
         return { key, value };
       }).filter(({ value }) => value !== 'NO_DATA');
   }
