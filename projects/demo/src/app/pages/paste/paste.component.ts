@@ -27,8 +27,8 @@ export class PasteComponent {
   protected readonly formGroup = this.fb.group({
     firstName: [''],
     lastName: [''],
-    phoneNumber: [''],
     company: [''],
+    phoneNumber: [''],
     addressLine1: [''],
     addressLine2: [''],
     city: [''],
