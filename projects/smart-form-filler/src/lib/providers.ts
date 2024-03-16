@@ -1,6 +1,7 @@
 import { Provider } from '@angular/core';
 import { OpenAIBackend } from './backends/open-ai-backend';
 import { OPEN_AI_CONFIG, OpenAIConfig } from './backends/open-ai-config';
+import { OpenAIToolBackend } from './backends/open-ai-tool-backend';
 import { WebLLMBackend } from './backends/web-llm-backend';
 import { ModelBackend } from './model-backend';
 
@@ -13,6 +14,13 @@ export function withOpenAIBackend(config: OpenAIConfig) {
   return [
     { provide: OPEN_AI_CONFIG, useValue: config },
     { provide: ModelBackend, useClass: OpenAIBackend },
+  ];
+}
+
+export function withOpenAIToolBackend(config: OpenAIConfig) {
+  return [
+    { provide: OPEN_AI_CONFIG, useValue: config },
+    { provide: ModelBackend, useClass: OpenAIToolBackend },
   ];
 }
 

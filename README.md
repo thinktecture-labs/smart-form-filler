@@ -20,6 +20,7 @@ Add a call to `provideFormFiller()` in your application config to use the form f
 You need to specify a backend to use the form filler. Currently, there are two backends:
 
 * The OpenAI backend (`withOpenAIBackend()`) talks to a OpenAI-compatible implementation such as OpenAI, Azure OpenAI, MistralAI, Groq, and others. It requires Internet access.
+* The OpenAI tool backend (`withOpenAIToolBackend()`) behaves as the OpenAI backend, but makes use of tools (previously function calling).
 * The experimental WebLLM backend (`withWebLLMBackend()`) uses WebLLM to execute a large language model locally. The initial download takes a relatively long time, but model inference is offline-capable from then on.
 
 ## Inspiration
