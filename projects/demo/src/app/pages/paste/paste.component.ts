@@ -44,7 +44,8 @@ export class PasteComponent {
       firstName: 'First name',
       lastName: 'Last name',
       addressLine1: 'Line 1',
-      addressLine2: 'Line 2'
+      addressLine2: 'Line 2',
+      company: 'Name of the company, not name of the group or department',
     });
 
     try {
