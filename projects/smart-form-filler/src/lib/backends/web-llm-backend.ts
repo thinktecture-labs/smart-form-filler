@@ -1,30 +1,35 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ChatModule } from '@mlc-ai/web-llm';
 import { CompletedFormField } from '../completed-form-field';
 import { FormField } from '../form-field';
 import { InferenceOptions } from '../inference-options';
 import { ModelBackend } from '../model-backend';
+import { WEB_LLM_CONFIG } from './web-llm-config';
 
 // TODO: Deduplicate prompt generation and response parsing
-// TODO: Model list to WebLLM config
 
 @Injectable()
 export class WebLLMBackend implements ModelBackend {
+  private readonly config = inject(WEB_LLM_CONFIG);
   private chatModule?: ChatModule;
 
   async getCompletions(fields: FormField[], userData: string, options?: InferenceOptions): Promise<CompletedFormField[]> {
     if (!this.chatModule) {
       this.chatModule = new ChatModule();
-      await this.chatModule.reload(options?.model ?? 'Mistral-7B-Instruct-v0.2-q4f16_1', undefined, {
-        model_list: [{
-          "model_url": "https://huggingface.co/mlc-ai/Mistral-7B-Instruct-v0.2-q4f16_1-MLC/resolve/main/",
-          "local_id": "Mistral-7B-Instruct-v0.2-q4f16_1",
-          "model_lib_url": "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/main/Mistral-7B-Instruct-v0.2/Mistral-7B-Instruct-v0.2-q4f16_1-sw4k_cs1k-webgpu.wasm",
-          "vram_required_MB": 6079.02,
-          "low_resource_required": false,
-          "required_features": ["shader-f16"],
-        }]
-      });
+      await this.chatModule.reload(
+        options?.model ?? this.config.model ?? 'Mistral-7B-Instruct-v0.2-q4f16_1',
+        undefined,
+        {
+          model_list: this.config.modelList ?? [{
+            'model_url': 'https://huggingface.co/mlc-ai/Mistral-7B-Instruct-v0.2-q4f16_1-MLC/resolve/main/',
+            'local_id': 'Mistral-7B-Instruct-v0.2-q4f16_1',
+            'model_lib_url': "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/main/Mistral-7B-Instruct-v0.2/Mistral-7B-Instruct-v0.2-q4f16_1-sw4k_cs1k-webgpu.wasm",
+            'vram_required_MB': 6079.02,
+            'low_resource_required': false,
+            'required_features': ['shader-f16'],
+          }],
+        },
+      );
     }
 
     const systemPrompt = this.getSystemPrompt(fields);
