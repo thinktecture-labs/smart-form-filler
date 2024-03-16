@@ -1,8 +1,8 @@
 export default {
   '/api/openai': {
-    'target': 'https://api.openai.com/v1',
+    'target': 'https://api.groq.com/openai/v1', // Using Groq API here - it is THE FASTEST to date
     'pathRewrite': {
-      '^/api/openai': ''
+      '^/api/inference': ''
     },
     'changeOrigin': true,
     'bypass': function (req) {
