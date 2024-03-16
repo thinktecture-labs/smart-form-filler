@@ -11,6 +11,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideFormFiller(withOpenAIBackend({
       baseURL: 'http://localhost:4200/api/inference/',
+      model: 'mixtral-8x7b-32768'
     })),
   ]
 };
