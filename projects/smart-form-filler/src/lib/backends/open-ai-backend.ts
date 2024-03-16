@@ -20,7 +20,7 @@ export class OpenAIBackend implements ModelBackend {
       dangerouslyAllowBrowser: true,
     });
     const response = await openAI.chat.completions.create({
-      model: options?.model ?? 'gpt-3.5-turbo',
+      model: options?.model ?? this.config.model ?? 'gpt-3.5-turbo',
       messages: [
         { content: systemPrompt, role: 'system' },
         { content: userPrompt, role: 'user' },
