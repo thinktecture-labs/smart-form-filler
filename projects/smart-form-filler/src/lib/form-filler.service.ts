@@ -9,6 +9,13 @@ import { ModelBackend } from './model-backend';
 export class FormFiller extends ModelBackend {
   private readonly modelBackend = inject(ModelBackend);
 
+  /**
+   * Gets completions for the given form fields based on the user data.
+   * @param fields The complete list of fields in this form.
+   * @param userData The data the user wants to fill, in human language.
+   * @param options Optional inference options.
+   * @returns An array of completed form fields. Fields that could not be completed are not part of the array.
+   */
   getCompletions(fields: FormField[], userData: string, options?: InferenceOptions): Promise<CompletedFormField[]> {
     return this.modelBackend.getCompletions(fields, userData, options);
   }
