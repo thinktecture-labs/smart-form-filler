@@ -5,6 +5,7 @@
 
 .group {
   display: flex;
+  gap: 2rem;
 }
 
 .segment {
@@ -18,4 +19,17 @@ mat-form-field {
 .buttons {
   text-align: center;
   margin-block: 2rem;
+}
+
+.spinning {
+  animation: spin 3s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
 }

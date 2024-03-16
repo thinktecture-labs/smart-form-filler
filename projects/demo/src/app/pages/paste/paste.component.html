@@ -48,13 +48,20 @@
 </form>
 
 <div class="buttons">
-  <button mat-button mat-raised-button color="primary">Submit</button>
-  <button (click)="onPaste()" mat-button mat-raised-button>Paste</button>
+  <button (click)="onPaste()" mat-button color="primary" mat-raised-button>
+    @if (inferenceInProgress()) {
+      <mat-icon class="spinning" svgIcon="spinner"></mat-icon>
+    } @else {
+      <mat-icon svgIcon="smart_paste"></mat-icon>
+    }
+
+    Paste
+  </button>
 </div>
 
 <div class="group">
   <mat-form-field class="segment">
-      <textarea cdkTextareaAutosize matInput>
+  <textarea cdkTextareaAutosize matInput>
 Verónica Ortíz
 PROLONGACION 3A NO109
 EJIDO 20 DE NOVIEMBRE
@@ -67,7 +74,7 @@ Phone 768.312-5495
 </textarea>
   </mat-form-field>
   <mat-form-field class="segment">
-      <textarea cdkTextareaAutosize matInput>
+  <textarea cdkTextareaAutosize matInput>
 Write to us at:
 Kidwelly Town Council
 Council Offices
@@ -81,7 +88,7 @@ E-mail: towncouncil@kidwelly.gov.uk
 </textarea>
   </mat-form-field>
   <mat-form-field class="segment">
-      <textarea cdkTextareaAutosize matInput>
+  <textarea cdkTextareaAutosize matInput>
 Dr. Akio Yamamoto works for Microsoft at Building 92, which is located at 15010 NE 36th St, Redmond, WA 98052.
 </textarea>
   </mat-form-field>
