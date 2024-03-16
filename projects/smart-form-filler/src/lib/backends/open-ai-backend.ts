@@ -28,11 +28,7 @@ export class OpenAIBackend implements ModelBackend {
       temperature: options?.temperature ?? 0,
       stop: [
         "END_RESPONSE",
-      ],
-      'max_tokens': 2000,
-      'top_p': 1,
-      'presence_penalty': 0,
-      'frequency_penalty': 0.1,
+      ]
     });
     return (response.choices[0].message.content ?? '')
       .split('\n')
