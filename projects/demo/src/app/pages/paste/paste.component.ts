@@ -28,6 +28,7 @@ export class PasteComponent {
     firstName: [''],
     lastName: [''],
     phoneNumber: [''],
+    company: [''],
     addressLine1: [''],
     addressLine2: [''],
     city: [''],
