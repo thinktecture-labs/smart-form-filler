@@ -1,6 +1,6 @@
 export default {
   '/api/inference': {
-    'target': 'https://api.groq.com/openai/v1', // Using Groq API here - it is THE FASTEST to date
+    'target': 'https://api.openai.com/v1',
     'pathRewrite': {
       '^/api/inference': ''
     },

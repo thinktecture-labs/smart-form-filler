@@ -14,4 +14,4 @@ export { InferenceOptions } from './lib/inference-options';
 export { ModelBackend } from './lib/model-backend';
 
 // Provider functions
-export { provideFormFiller, withOpenAIBackend } from './lib/providers';
+export { provideFormFiller, withOpenAIToolsBackend } from './lib/providers';
