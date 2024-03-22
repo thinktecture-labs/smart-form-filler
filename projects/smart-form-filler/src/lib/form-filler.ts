@@ -5,7 +5,7 @@ import { FormField } from './form-field';
 import { InferenceOptions } from './inference-options';
 import { ModelBackend } from './model-backend';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class FormFiller extends ModelBackend {
   private readonly modelBackend = inject(ModelBackend);
 

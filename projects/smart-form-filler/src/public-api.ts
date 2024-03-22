@@ -3,15 +3,15 @@
  */
 
 // Service
-export { FormFiller } from './lib/form-filler.service';
+export { FormFiller } from './lib/form-filler';
 
 // Models
 export { FormField } from './lib/form-field';
 export { CompletedFormField } from './lib/completed-form-field';
 export { InferenceOptions } from './lib/inference-options';
 
-// Model backend for exensibility
+// Model backend for extensibility
 export { ModelBackend } from './lib/model-backend';
 
 // Provider functions
-export { provideFormFiller, withOpenAIToolsBackend } from './lib/providers';
+export { provideFormFiller, withOpenAIBackend, withOpenAIToolsBackend, withWebLLMBackend } from './lib/providers';
