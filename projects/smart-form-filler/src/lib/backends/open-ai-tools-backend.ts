@@ -1,12 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import OpenAI from 'openai';
 import { InferenceOptions } from '../inference-options';
-import { TextParams } from '../prompt-handler/text-prompt-handler';
+import { JsonToolParams } from '../prompt-handler/json-tool-prompt-handler';
 import { ModelBackend } from './model-backend';
 import { defaultConfig, OPEN_AI_CONFIG } from './open-ai-config';
 
 @Injectable()
-export class OpenAIBackend implements ModelBackend<TextParams> {
+export class OpenAIToolsBackend implements ModelBackend<JsonToolParams> {
   private readonly config = inject(OPEN_AI_CONFIG);
   private readonly openAI = new OpenAI({
     baseURL: this.config.baseURL,
@@ -15,12 +15,13 @@ export class OpenAIBackend implements ModelBackend<TextParams> {
     dangerouslyAllowBrowser: true,
   });
 
-  async generate(params: TextParams, options?: InferenceOptions): Promise<string | null | undefined> {
-    const response = await this.openAI.chat.completions.create({
+  async generate(params: JsonToolParams, options?: InferenceOptions): Promise<string | null | undefined> {
+    const runner = this.openAI.beta.chat.completions.runTools({
       ...params,
       model: options?.model ?? this.config.model ?? defaultConfig.model,
       temperature: options?.temperature ?? 0,
     });
-    return response.choices[0]?.message.content;
+    const response = await runner.finalChatCompletion();
+    return response.choices[0].message.tool_calls?.[0]?.function.arguments;
   }
 }

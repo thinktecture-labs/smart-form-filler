@@ -1,13 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ModelBackend } from './backends/model-backend';
 import { CompletedFormField } from './completed-form-field';
 import { FormField } from './form-field';
 import { InferenceOptions } from './inference-options';
-import { ModelBackend } from './model-backend';
+import { PromptHandler } from './prompt-handler/prompt-handler';
 
 @Injectable()
-export class FormFiller extends ModelBackend {
+export class SmartFormFiller {
   private readonly modelBackend = inject(ModelBackend);
+  private readonly promptHandler = inject(PromptHandler);
 
   /**
    * Gets completions for the given form fields based on the user data.
@@ -16,8 +18,14 @@ export class FormFiller extends ModelBackend {
    * @param options Optional inference options.
    * @returns An array of completed form fields. Fields that could not be completed are not part of the array.
    */
-  getCompletions(fields: FormField[], userData: string, options?: InferenceOptions): Promise<CompletedFormField[]> {
-    return this.modelBackend.getCompletions(fields, userData, options);
+  async getCompletions(fields: FormField[], userData: string, options?: InferenceOptions): Promise<CompletedFormField[]> {
+    const params = this.promptHandler.getRequestParams(fields, userData);
+    const response = await this.modelBackend.generate(params, options);
+    if (response == null) {
+      throw new Error('No valid response received.');
+    }
+
+    return this.promptHandler.parseResponse(response);
   }
 
   getFormFieldsFromFormGroup(formGroup: FormGroup, descriptions: { [key: string]: string } = {}): FormField[] {

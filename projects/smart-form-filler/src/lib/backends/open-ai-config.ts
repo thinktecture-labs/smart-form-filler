@@ -13,3 +13,7 @@ export interface OpenAIConfig {
 }
 
 export const OPEN_AI_CONFIG = new InjectionToken<OpenAIConfig>('OpenAI Config');
+
+export const defaultConfig: OpenAIConfig & { model: string } = {
+  model: 'gpt-3.5-turbo'
+};

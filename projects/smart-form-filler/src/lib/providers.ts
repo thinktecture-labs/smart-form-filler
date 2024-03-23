@@ -1,46 +1,54 @@
 // noinspection JSNonASCIINames,NonAsciiCharacters
 
 import { EnvironmentProviders, makeEnvironmentProviders, Provider } from '@angular/core';
+import { ModelBackend } from './backends/model-backend';
 import { OpenAIBackend } from './backends/open-ai-backend';
 import { OPEN_AI_CONFIG, OpenAIConfig } from './backends/open-ai-config';
-import { OpenAIToolsBackend } from './backends/open-ai-tools-backend.service';
+import { OpenAIToolsBackend } from './backends/open-ai-tools-backend';
 import { WebLLMBackend } from './backends/web-llm-backend';
-import { FormFiller } from './form-filler';
-import { ModelBackend } from './model-backend';
+import { WEB_LLM_CONFIG, WebLLMConfig } from './backends/web-llm-config';
+import { SmartFormFiller } from './smart-form-filler';
+import { JsonToolPromptHandler } from './prompt-handler/json-tool-prompt-handler';
+import { PromptHandler } from './prompt-handler/prompt-handler';
+import { TextPromptHandler } from './prompt-handler/text-prompt-handler';
 
-interface FormFillerFeature {
+interface SmartFormFillerFeature {
   ɵproviders: Provider[];
 }
 
-export function provideFormFiller(feature: FormFillerFeature): EnvironmentProviders {
+export function provideSmartFormFiller(feature: SmartFormFillerFeature): EnvironmentProviders {
   return makeEnvironmentProviders([
-    FormFiller,
+    SmartFormFiller,
     feature.ɵproviders,
   ]);
 }
 
-export function withOpenAIBackend(config: OpenAIConfig): FormFillerFeature {
+export function withOpenAIBackend(config: OpenAIConfig): SmartFormFillerFeature {
   return {
     ɵproviders: [
       { provide: OPEN_AI_CONFIG, useValue: config },
       { provide: ModelBackend, useClass: OpenAIBackend },
+      { provide: PromptHandler, useClass: TextPromptHandler },
     ],
   };
 }
 
-export function withOpenAIToolsBackend(config: OpenAIConfig): FormFillerFeature {
+export function withOpenAIToolsBackend(config: OpenAIConfig): SmartFormFillerFeature {
   return {
     ɵproviders: [
       { provide: OPEN_AI_CONFIG, useValue: config },
       { provide: ModelBackend, useClass: OpenAIToolsBackend },
+      { provide: PromptHandler, useClass: JsonToolPromptHandler },
     ],
   };
 }
 
-export function withWebLLMBackend(): FormFillerFeature {
+export function withWebLLMBackend(config: WebLLMConfig = {}): SmartFormFillerFeature {
   return {
     ɵproviders: [
+      { provide: WEB_LLM_CONFIG, useValue: config },
       { provide: ModelBackend, useClass: WebLLMBackend },
+      { provide: PromptHandler, useClass: TextPromptHandler },
     ],
   };
 }

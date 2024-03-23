@@ -1,6 +1,6 @@
 export default {
   '/api/inference': {
-    'target': 'https://api.openai.com/v1',
+    'target': 'https://api.openai.com/v1', // https://api.groq.com/openai/v1
     'pathRewrite': {
       '^/api/inference': ''
     },

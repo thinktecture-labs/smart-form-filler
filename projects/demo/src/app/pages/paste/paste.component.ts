@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { FormFiller } from '../../../../../smart-form-filler/src/public-api';
+import { SmartFormFiller } from '../../../../../smart-form-filler/src/public-api';
 
 @Component({
   selector: 'app-paste',
@@ -21,7 +21,7 @@ import { FormFiller } from '../../../../../smart-form-filler/src/public-api';
 })
 export class PasteComponent {
   private readonly fb = inject(NonNullableFormBuilder);
-  private readonly formFiller = inject(FormFiller);
+  private readonly formFiller = inject(SmartFormFiller);
 
   protected readonly inferenceInProgress = signal(false);
   protected readonly formGroup = this.fb.group({
