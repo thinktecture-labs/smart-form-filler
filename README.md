@@ -4,12 +4,11 @@ AI-backed forms companion for Angular.
 
 ## Run this project
 
-The demo project is configured to use Groq by default.
-This platform currently offers the fastest model inference.
-But you can also use OpenAI or another provider.
+The demo project is configured to use OpenAI by default.
+You can also use another OpenAI-compatible provider.
 
 Before running the demo, you will need to set your OpenAI key by using the environment variable `OPENAI_API_KEY`.
-Use the same variable to set your API key for Groq or any other OpenAI-compatible provider.
+Use the same variable to set your API key for any other OpenAI-compatible provider.
 
 Run `npm start`.
 
