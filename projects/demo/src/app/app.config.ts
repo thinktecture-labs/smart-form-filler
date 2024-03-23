@@ -1,9 +1,9 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideSmartFormFiller, withOpenAIToolsBackend } from '../../../smart-form-filler/src/public-api';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { routes } from './app.routes';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideSmartFormFiller, withOpenAIToolsBackend } from '../../../smart-form-filler/src/public-api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
