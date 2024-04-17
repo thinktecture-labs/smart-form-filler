@@ -35,7 +35,7 @@ export class PasteComponent {
     state: [''],
     zip: [''],
     country: [''],
-  })
+  });
 
   async onPaste() {
     this.inferenceInProgress.set(true);
