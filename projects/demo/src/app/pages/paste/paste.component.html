@@ -81,10 +81,6 @@
 </form>
 
 <div class="buttons">
-  <button (click)="formGroup.reset()" mat-button mat-stroked-button>
-    Clear
-  </button>
-
   <button
     (click)="paste()"
     mat-button
@@ -101,42 +97,54 @@
     Einfügen
   </button>
 
-  <button
-    (click)="listen()"
-    mat-button
-    color="primary"
-    mat-raised-button
-    [disabled]="inferencing()"
-  >
-    <mat-icon>{{ listening() ? "stop_circle" : "mic" }}</mat-icon>
-    {{ listening() ? "Fertig" : "Spracherkennung" }}
+  <button (click)="formGroup.reset()" mat-button mat-stroked-button>
+    Clear
   </button>
 </div>
 
 <div class="group">
-  <mat-form-field class="segment">
-    <textarea cdkTextareaAutosize matInput>
+  <div class="segment">
+    <mat-form-field>
+      <textarea cdkTextareaAutosize matInput>
 Ford Focus ST-Line 2018
 RA KL 8136
 53105 km
 Sommerbereifung
 Profiltiefe überall 1,6 mm, hinten links 1,3 mm
-Steinschlag vorne im Sichtbereich
-    </textarea>
-  </mat-form-field>
-  <mat-form-field class="segment">
-    <textarea cdkTextareaAutosize matInput>
+Steinschlag vorne im Sichtbereich</textarea
+      >
+    </mat-form-field>
+  </div>
+
+  <div class="segment">
+    <mat-form-field>
+      <textarea cdkTextareaAutosize matInput>
 Ich untersuche einen Ford Focus ST-Line, Modelljahr 2018.
 Das Kennzeichen ist RA KL 8136.
 Das Auto hat eine Laufleistung von 53105 Kilometern und fährt aktuell Sommerreifen.
 Ich messe jetzt die Profiltiefe.
 Vorne links 1,6 mm. Vorne rechts auch. Hinten rechts auch. Hinten links nur 1,3 mm.
-In der Windschutzscheibe fällt mir ein Steinschlag auf, der sich im Sichtfeld befindet.
-    </textarea>
-  </mat-form-field>
-  <mat-form-field class="segment">
-    <textarea cdkTextareaAutosize matInput readonly>
-      {{ transcribedText() }}
-    </textarea>
-  </mat-form-field>
+In der Windschutzscheibe fällt mir ein Steinschlag auf, der sich im Sichtfeld befindet.</textarea
+      >
+    </mat-form-field>
+  </div>
+
+  <div class="segment">
+    <button
+      (click)="listen()"
+      mat-button
+      color="primary"
+      mat-raised-button
+      [disabled]="inferencing()"
+    >
+      <mat-icon>{{ listening() ? "stop_circle" : "mic" }}</mat-icon>
+      {{ listening() ? "Fertig" : "Spracherkennung" }}
+    </button>
+
+    <mat-form-field>
+      <textarea cdkTextareaAutosize matInput readonly>{{
+        transcribedText()
+      }}</textarea>
+    </mat-form-field>
+  </div>
 </div>
