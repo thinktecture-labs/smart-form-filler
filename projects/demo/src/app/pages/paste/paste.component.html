@@ -1,99 +1,130 @@
 <form class="group" [formGroup]="formGroup">
   <div class="segment">
     <mat-form-field>
-      <mat-label>First Name</mat-label>
-      <input matInput formControlName="firstName">
+      <mat-label>Datum der Untersuchung</mat-label>
+      <input matInput [matDatepicker]="datepicker" formControlName="date" />
+      <mat-datepicker-toggle matIconSuffix [for]="datepicker" />
+      <mat-datepicker #datepicker />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Last Name</mat-label>
-      <input matInput formControlName="lastName">
+      <mat-label>Hersteller</mat-label>
+      <input matInput formControlName="make" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Company</mat-label>
-      <input matInput formControlName="company">
+      <mat-label>Modell</mat-label>
+      <input matInput formControlName="model" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Phone Number</mat-label>
-      <input matInput formControlName="phoneNumber">
+      <mat-label>Kennzeichen</mat-label>
+      <input matInput formControlName="licensePlate" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Kilometerstand</mat-label>
+      <input matInput formControlName="mileage" type="number" />
+      <span matTextSuffix>km</span>
     </mat-form-field>
   </div>
   <div class="segment">
-    <mat-form-field>
-      <mat-label>Line 1</mat-label>
-      <input matInput formControlName="addressLine1">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Line 2</mat-label>
-      <input matInput formControlName="addressLine2">
-    </mat-form-field>
+    <mat-radio-group formControlName="tireType">
+      <mat-radio-button value="Sommerreifen">Sommerreifen</mat-radio-button>
+      <mat-radio-button value="Winterreifen">Winterreifen</mat-radio-button>
+      <mat-radio-button value="Allwetterreifen">
+        Allwetterreifen
+      </mat-radio-button>
+    </mat-radio-group>
     <div class="group">
       <div class="segment">
         <mat-form-field>
-          <mat-label>City</mat-label>
-          <input matInput formControlName="city">
+          <mat-label>Profiltiefe vorne links</mat-label>
+          <input matInput formControlName="treadDepthFrontLeft" type="number" />
+          <span matTextSuffix>mm</span>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>State</mat-label>
-          <input matInput formControlName="state">
+          <mat-label>Profiltiefe hinten links</mat-label>
+          <input matInput formControlName="treadDepthRearLeft" type="number" />
+          <span matTextSuffix>mm</span>
         </mat-form-field>
       </div>
       <div class="segment">
         <mat-form-field>
-          <mat-label>Zip</mat-label>
-          <input matInput formControlName="zip">
+          <mat-label>Profiltiefe vorne rechts</mat-label>
+          <input
+            matInput
+            formControlName="treadDepthFrontRight"
+            type="number"
+          />
+          <span matTextSuffix>mm</span>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Country</mat-label>
-          <input matInput formControlName="country">
+          <mat-label>Profiltiefe hinten rechts</mat-label>
+          <input matInput formControlName="treadDepthRearRight" type="number" />
+          <span matTextSuffix>mm</span>
         </mat-form-field>
       </div>
     </div>
+    <div class="group">
+      <mat-checkbox formControlName="stoneChipInWindshield">
+        Steinschlag Frontscheibe
+      </mat-checkbox>
+      <mat-checkbox formControlName="stoneChipInWindshieldWithCracking">
+        Rissbildung
+      </mat-checkbox>
+      <mat-checkbox formControlName="stoneChipInWindshieldViewingArea">
+        Im Sichtbereich
+      </mat-checkbox>
+    </div>
+    <mat-form-field>
+      <mat-label>Anmerkungen</mat-label>
+      <input matInput formControlName="notes" />
+    </mat-form-field>
   </div>
 </form>
 
 <div class="buttons">
+  <button (click)="formGroup.reset()" mat-button mat-stroked-button>
+    Clear
+  </button>
+
   <button (click)="onPaste()" mat-button color="primary" mat-raised-button>
     @if (inferenceInProgress()) {
-      <mat-icon class="spinning" svgIcon="spinner"></mat-icon>
+      <mat-icon class="spinning" svgIcon="spinner" />
     } @else {
-      <mat-icon svgIcon="smart_paste"></mat-icon>
+      <mat-icon svgIcon="smart_paste" />
     }
 
     Paste
+  </button>
+
+  <!-- TODO: align with second textarea -->
+  <button mat-button color="primary" mat-raised-button>
+    <mat-icon svgIcon="mic" />
+    Listen
   </button>
 </div>
 
 <div class="group">
   <mat-form-field class="segment">
-  <textarea cdkTextareaAutosize matInput>
-Verónica Ortíz
-PROLONGACION 3A NO109
-EJIDO 20 DE NOVIEMBRE
-Tamaulipas
-Matamoros
-87394
-México
-
-Phone 768.312-5495
-</textarea>
+    <textarea cdkTextareaAutosize matInput>
+Ford Focus ST-Line 2018
+RA KL 8136
+53105 km
+Sommerbereifung
+Profiltiefe überall 1,6 mm, hinten links 1,3 mm
+Steinschlag vorne im Sichtbereich
+    </textarea>
   </mat-form-field>
   <mat-form-field class="segment">
-  <textarea cdkTextareaAutosize matInput>
-Write to us at:
-Kidwelly Town Council
-Council Offices
-Hillfield Villas
-Kidwelly
-Carmarthenshire
-SA17 4UL
-
-Telephone: 01554 890203
-E-mail: towncouncil@kidwelly.gov.uk
-</textarea>
+    <textarea cdkTextareaAutosize matInput>
+Ich untersuche einen Ford Focus ST-Line, Modelljahr 2018.
+Das Kennzeichen ist RA KL 8136.
+Das Auto hat eine Laufleistung von 53105 Kilometern und fährt aktuell Sommerreifen.
+Ich messe jetzt die Profiltiefe.
+Vorne links 1,6 mm. Vorne rechts auch. Hinten rechts auch. Hinten links nur 1,3 mm.
+In der Windschutzscheibe fällt mir ein Steinschlag auf, der sich im Sichtfeld befindet.
+    </textarea>
   </mat-form-field>
   <mat-form-field class="segment">
-  <textarea cdkTextareaAutosize matInput>
-Dr. Akio Yamamoto works for Microsoft at Building 92, which is located at 15010 NE 36th St, Redmond, WA 98052.
-</textarea>
+    <!-- TODO: whisper API -->
+    <textarea cdkTextareaAutosize matInput></textarea>
   </mat-form-field>
 </div>

@@ -12,13 +12,24 @@
   flex: 1;
 }
 
-mat-form-field {
+mat-form-field,
+mat-checkbox,
+mat-radio-group {
   display: block;
 }
 
+mat-radio-group,
+mat-checkbox {
+  height: 3.5rem;
+  margin-block-end: 1.375rem;
+  display: flex;
+  align-items: center;
+}
+
 .buttons {
-  text-align: center;
   margin-block: 2rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .spinning {
