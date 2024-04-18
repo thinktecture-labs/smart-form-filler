@@ -7,6 +7,7 @@ import {
 } from '../../../smart-form-filler/src/public-api';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { TRANSCRIPTION_URL } from './audio-recording/audio-recording.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,10 +15,14 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideSmartFormFiller(
       withOpenAIBackend({
-        baseURL: `${location.origin}/api/inference/`,
+        baseURL: `${location.origin}/api/groq/openai/v1`,
         model: 'mixtral-8x7b-32768',
       }),
     ),
     provideHttpClient(),
+    {
+      provide: TRANSCRIPTION_URL,
+      useValue: `${location.origin}/api/openai/v1/audio/transcriptions`,
+    },
   ],
 };
