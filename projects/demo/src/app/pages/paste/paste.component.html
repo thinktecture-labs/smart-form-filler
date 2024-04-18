@@ -85,20 +85,31 @@
     Clear
   </button>
 
-  <button (click)="onPaste()" mat-button color="primary" mat-raised-button>
-    @if (inferenceInProgress()) {
-      <mat-icon class="spinning" svgIcon="spinner" />
+  <button
+    (click)="paste()"
+    mat-button
+    color="primary"
+    mat-raised-button
+    [disabled]="inferencing()"
+  >
+    @if (inferencing()) {
+      <mat-icon class="spinning">refresh</mat-icon>
     } @else {
-      <mat-icon svgIcon="smart_paste" />
+      <mat-icon>content_paste</mat-icon>
     }
 
-    Paste
+    Einfügen
   </button>
 
-  <!-- TODO: align with second textarea -->
-  <button mat-button color="primary" mat-raised-button>
-    <mat-icon svgIcon="mic" />
-    Listen
+  <button
+    (click)="listen()"
+    mat-button
+    color="primary"
+    mat-raised-button
+    [disabled]="inferencing()"
+  >
+    <mat-icon>{{ listening() ? "stop_circle" : "mic" }}</mat-icon>
+    {{ listening() ? "Fertig" : "Spracherkennung" }}
   </button>
 </div>
 
@@ -124,7 +135,8 @@ In der Windschutzscheibe fällt mir ein Steinschlag auf, der sich im Sichtfeld b
     </textarea>
   </mat-form-field>
   <mat-form-field class="segment">
-    <!-- TODO: whisper API -->
-    <textarea cdkTextareaAutosize matInput></textarea>
+    <textarea cdkTextareaAutosize matInput readonly>
+      {{ transcribedText() }}
+    </textarea>
   </mat-form-field>
 </div>
