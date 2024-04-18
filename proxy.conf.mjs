@@ -14,7 +14,7 @@ export default {
   "/api/transcription": {
     target: "https://api.openai.com/v1/audio/transcriptions",
     pathRewrite: {
-      "^/api/whisper": "",
+      "^/api/transcription": "",
     },
     changeOrigin: true,
     bypass: function (req) {
