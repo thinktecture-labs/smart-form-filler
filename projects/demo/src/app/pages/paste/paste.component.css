@@ -26,10 +26,9 @@ mat-checkbox {
   align-items: center;
 }
 
-.buttons {
-  margin-block: 2rem;
-  display: flex;
-  gap: 1rem;
+button {
+  margin-block-end: 1rem;
+  margin-inline-end: 1rem;
 }
 
 .spinning {

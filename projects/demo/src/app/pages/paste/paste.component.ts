@@ -101,6 +101,7 @@ export class PasteComponent {
       const response = await firstValueFrom(
         this.audioRecordingService.transcribe(blob),
       );
+      this.transcribedText.set(response.text);
       this.inference(response.text);
     } catch (err) {
       console.error(err);
