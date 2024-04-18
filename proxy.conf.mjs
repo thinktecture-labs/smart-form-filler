@@ -11,7 +11,7 @@ export default {
       req.headers["authorization"] = `Bearer ${process.env.GROQ_API_KEY}`;
     },
   },
-  "/api/whisper": {
+  "/api/transcription": {
     target: "https://api.openai.com/v1/audio/transcriptions",
     pathRewrite: {
       "^/api/whisper": "",

@@ -1,3 +1,4 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
@@ -16,7 +17,8 @@ export const appConfig: ApplicationConfig = {
         baseURL: `${location.origin}/api/inference/`,
         model: 'mixtral-8x7b-32768',
       }),
+      // withCustomPromptHandler(EnglishTextPromptHandler),
     ),
-    // withCustomPromptHandler(EnglishTextPromptHandler),
+    provideHttpClient(),
   ],
 };
