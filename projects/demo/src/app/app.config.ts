@@ -6,6 +6,7 @@ import {
   withOpenAIBackend,
 } from '../../../smart-form-filler/src/public-api';
 import { routes } from './app.routes';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,5 +18,6 @@ export const appConfig: ApplicationConfig = {
         model: 'mixtral-8x7b-32768',
       }),
     ),
+    provideHttpClient(),
   ],
 };
