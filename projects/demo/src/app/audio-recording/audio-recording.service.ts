@@ -1,10 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, InjectionToken, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+
+export const TRANSCRIPTION_URL = new InjectionToken<string>(
+  'Transcription URL',
+);
 
 @Injectable({ providedIn: 'root' })
 export class AudioRecordingService {
   private readonly httpClient = inject(HttpClient);
+  private readonly transcriptionUrl = inject(TRANSCRIPTION_URL);
   private mediaRecorder: MediaRecorder | undefined;
   private audioChunks: Blob[] = [];
   private stream?: MediaStream;
@@ -43,7 +48,7 @@ export class AudioRecordingService {
     formData.append('file', audioBlob);
 
     return this.httpClient.post<{ text: string }>(
-      `${location.origin}/api/transcription`,
+      this.transcriptionUrl,
       formData,
     );
   }
