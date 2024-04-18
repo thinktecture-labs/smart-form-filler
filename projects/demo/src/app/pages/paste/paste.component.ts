@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { SmartFormFiller } from '../../../../../smart-form-filler/src/public-api';
+import { AudioRecordingService } from '../../audio-recording/audio-recording.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-paste',
@@ -30,8 +32,11 @@ import { SmartFormFiller } from '../../../../../smart-form-filler/src/public-api
 export class PasteComponent {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly formFiller = inject(SmartFormFiller);
+  private readonly audioRecordingService = inject(AudioRecordingService);
 
-  protected readonly inferenceInProgress = signal(false);
+  protected readonly inferencing = signal(false);
+  protected readonly listening = signal(false);
+  protected readonly transcribedText = signal('');
   protected readonly formGroup = this.fb.group({
     date: [''],
     make: [''],
@@ -72,10 +77,39 @@ export class PasteComponent {
     },
   );
 
-  async onPaste() {
-    this.inferenceInProgress.set(true);
-    const userData = await navigator.clipboard.readText();
+  async paste(): Promise<void> {
+    this.inferencing.set(true);
 
+    const userData = await navigator.clipboard.readText();
+    await this.inference(userData);
+
+    this.inferencing.set(false);
+  }
+
+  async listen(): Promise<void> {
+    if (!this.listening()) {
+      this.listening.set(true);
+      await this.audioRecordingService.startRecording();
+      return;
+    }
+
+    this.listening.set(false);
+    this.inferencing.set(true);
+
+    try {
+      const blob = await this.audioRecordingService.stopRecording();
+      const response = await firstValueFrom(
+        this.audioRecordingService.transcribe(blob),
+      );
+      this.inference(response.text);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      this.inferencing.set(false);
+    }
+  }
+
+  private async inference(userData: string): Promise<void> {
     try {
       const completions = await this.formFiller.getCompletions(
         this.fields,
@@ -88,7 +122,5 @@ export class PasteComponent {
     } catch (err) {
       console.error(err);
     }
-
-    this.inferenceInProgress.set(false);
   }
 }
