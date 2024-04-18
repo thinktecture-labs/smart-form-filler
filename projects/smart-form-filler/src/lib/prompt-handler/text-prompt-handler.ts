@@ -4,7 +4,10 @@ import { FormField } from '../form-field';
 import { PromptHandler } from './prompt-handler';
 
 export interface TextParams {
-  messages: [{ content: string, role: 'system' }, { content: string, role: 'user' }];
+  messages: [
+    { content: string; role: 'system' },
+    { content: string; role: 'user' },
+  ];
   stop: string;
 }
 
@@ -21,27 +24,31 @@ export class TextPromptHandler extends PromptHandler<TextParams> {
   }
 
   generateSystemMessage(fields: FormField[]): string {
-    const currentDate = new Date().toLocaleDateString('en-US', {
+    const currentDate = new Date().toLocaleDateString('de-DE', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
     const fieldString = fields
-      .map(({ key, description, type }) => `FIELD ${key}^^^The ${description ?? key} of type ${type}`)
+      .map(
+        ({ key, description, type }) =>
+          `FIELD ${key}^^^${description ?? key} vom Typ ${type}`,
+      )
       .join('\n');
 
-    return `Current date: ${currentDate}
+    return `Aktuelles Datum: ${currentDate}
 
-Each response line matches the following format:
+Jede Antwortzeile hat das folgende Format:
 FIELD identifier^^^value
 
-Give a response with the following lines only, with values inferred from USER_DATA:
+Gib eine Antwort mit ausschließlich den folgenden Zeilen und Werten abgeleitet von USER_DATA:
 
 ${fieldString}END_RESPONSE
 
-Do not explain how the values were determined.
-For fields without any corresponding information in USER_DATA, use value NO_DATA.
+Erkläre nicht wie die Werte zustande kommen.
+Für Felder ohne entsprechender Information in USER_DATA nutze den Wert NO_DATA.
+Für Felder vom Typ number nutze nur Ziffern und optional einen Dezimalseparator.
     `;
   }
 
@@ -52,13 +59,20 @@ For fields without any corresponding information in USER_DATA, use value NO_DATA
   override parseResponse(response: string): CompletedFormField[] {
     return response
       .split('\n')
-      .map(resultLine => {
+      .map((resultLine) => {
         // For compatibility with OpenAI-compatible local models (which may behave differently than GPT-3.5), this regex
         // a) ignores any whitespace before the first FIELD, as local models may add it
         // b) accepts at least three circumflex (^) characters, as local models may return more
         // c) omits the END_RESPONSE stop word, as local models may return it
-        const [, key, value] = /\s*FIELD\s(.*?)\^{3,}(.*?)(END_RESPONSE)?$/g.exec(resultLine) ?? [];
+        const [, key, value] =
+          /\s*FIELD\s(.*?)[\^\*\\]{3,}(.*?)(END\\?_RESPONSE)?$/g.exec(
+            resultLine,
+          ) ?? [];
         return { key, value };
-      }).filter(({ value }) => value !== 'NO_DATA');
+      })
+      .filter(
+        ({ value }) =>
+          value !== 'NO_DATA' && value !== 'NO\\_DATA' && value !== 'false',
+      );
   }
 }
