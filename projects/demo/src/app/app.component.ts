@@ -19,17 +19,33 @@ const SMART_PASTE_ICON = `
           d="m208.1 425 14.8 14.1c4.2 4 6.5 9.5 6.5 15.3 0 8.7 6.9 15.7 15.5 15.7h49.5c8.6 0 15.5-7 15.5-15.7 0-5.8 2.4-11.3 6.5-15.3l14.8-14.1c20.7-19.9 32.2-46 32.3-73.1v-1.1c0-46.3-42-84.5-93.9-84.5s-93.9 38.1-93.9 84.5v1.1c0.2 27.2 11.8 53.3 32.4 73.1z"/>
       </svg>
 `;
+const MIC_ICON = `
+      <svg viewBox="0 0 24 24">
+        <path d="M12,14c1.66,0,3-1.34,3-3V5c0-1.66-1.34-3-3-3S9,3.34,9,5v6C9,12.66,10.34,14,12,14z"/>
+        <path d="M17,11c0,2.76-2.24,5-5,5s-5-2.24-5-5H5c0,3.53,2.61,6.43,6,6.92V21h2v-3.08c3.39-0.49,6-3.39,6-6.92H17z"/>
+      </svg>
+`;
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, NavComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    iconRegistry.addSvgIconLiteral('spinner', sanitizer.bypassSecurityTrustHtml(SPINNER_ICON));
-    iconRegistry.addSvgIconLiteral('smart_paste', sanitizer.bypassSecurityTrustHtml(SMART_PASTE_ICON));
+    iconRegistry.addSvgIconLiteral(
+      'spinner',
+      sanitizer.bypassSecurityTrustHtml(SPINNER_ICON),
+    );
+    iconRegistry.addSvgIconLiteral(
+      'smart_paste',
+      sanitizer.bypassSecurityTrustHtml(SMART_PASTE_ICON),
+    );
+    iconRegistry.addSvgIconLiteral(
+      'mic',
+      sanitizer.bypassSecurityTrustHtml(MIC_ICON),
+    );
   }
 }
