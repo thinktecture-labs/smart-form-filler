@@ -14,7 +14,7 @@ import { SmartFormFiller } from '../../../../../smart-form-filler/src/public-api
 import { AudioRecordingService } from '../../audio-recording/audio-recording.service';
 
 @Component({
-  selector: 'app-paste',
+  selector: 'app-demo-2',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -27,11 +27,11 @@ import { AudioRecordingService } from '../../audio-recording/audio-recording.ser
     MatDatepickerModule,
     MatSelectModule,
   ],
-  templateUrl: './paste.component.html',
-  styleUrl: './paste.component.css',
+  templateUrl: './demo-2.component.html',
+  styleUrl: './demo-2.component.css',
   providers: [provideNativeDateAdapter()],
 })
-export class PasteComponent {
+export class Demo2Component {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly formFiller = inject(SmartFormFiller);
   private readonly audioRecordingService = inject(AudioRecordingService);

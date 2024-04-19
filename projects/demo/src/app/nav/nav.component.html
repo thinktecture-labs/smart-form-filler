@@ -9,7 +9,23 @@
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="paste">Paste</a>
+      <a mat-list-item routerLink="demo-paste">Paste</a>
+      <a
+        mat-list-item
+        routerLink="demo-1"
+        routerLinkActive
+        #demo1="routerLinkActive"
+        [activated]="demo1.isActive"
+        >Demo 1</a
+      >
+      <a
+        mat-list-item
+        routerLink="demo-2"
+        routerLinkActive
+        #demo2="routerLinkActive"
+        [activated]="demo2.isActive"
+        >Demo 2</a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
