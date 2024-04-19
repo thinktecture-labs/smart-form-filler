@@ -11,11 +11,11 @@ You need to specify a backend to use the form filler. Currently, there are the f
 
 ## Run this project
 
-The demo project is configured to use OpenAI by default.
-You can also use another OpenAI-compatible provider (e.g., Groq).
+Before running the demo, you will need to set some keys:
 
-Before running the demo, you will need to set your OpenAI key by using the environment variable `OPENAI_API_KEY`.
-Use the same variable to set your API key for any other OpenAI-compatible provider.
+- Groq API key in the environment variable `GROQ_API_KEY`
+- OpenAI API key in the environment variable `OPENAI_API_KEY`
+- Mistral AI API key in the environment variable `MISTRAL_API_KEY`
 
 Run `npm start`.
 
