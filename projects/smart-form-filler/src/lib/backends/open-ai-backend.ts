@@ -15,8 +15,20 @@ export class OpenAIBackend implements ModelBackend<TextParams> {
     dangerouslyAllowBrowser: true,
   });
 
-  async generate(params: TextParams, options?: InferenceOptions): Promise<string | null | undefined> {
-    const response = await this.openAI.chat.completions.create({
+  async generate(
+    params: TextParams,
+    options?: InferenceOptions,
+  ): Promise<string | null | undefined> {
+    let openAI = this.openAI;
+    if (options?.baseURL !== undefined) {
+      openAI = new OpenAI({
+        baseURL: options.baseURL,
+        apiKey: 'FAKE',
+        dangerouslyAllowBrowser: true,
+      });
+    }
+
+    const response = await openAI.chat.completions.create({
       ...params,
       model: options?.model ?? this.config.model ?? defaultConfig.model,
       temperature: options?.temperature ?? 0,
