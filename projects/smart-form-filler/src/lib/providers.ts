@@ -17,14 +17,15 @@ interface SmartFormFillerFeature {
   ɵproviders: Provider[];
 }
 
-export function provideSmartFormFiller(feature: SmartFormFillerFeature): EnvironmentProviders {
-  return makeEnvironmentProviders([
-    SmartFormFiller,
-    feature.ɵproviders,
-  ]);
+export function provideSmartFormFiller(
+  feature: SmartFormFillerFeature,
+): EnvironmentProviders {
+  return makeEnvironmentProviders([SmartFormFiller, feature.ɵproviders]);
 }
 
-export function withOpenAIBackend(config: OpenAIConfig): SmartFormFillerFeature {
+export function withOpenAIBackend(
+  config: OpenAIConfig = {},
+): SmartFormFillerFeature {
   return {
     ɵproviders: [
       { provide: OPEN_AI_CONFIG, useValue: config },
@@ -34,7 +35,9 @@ export function withOpenAIBackend(config: OpenAIConfig): SmartFormFillerFeature 
   };
 }
 
-export function withOpenAIToolsBackend(config: OpenAIConfig): SmartFormFillerFeature {
+export function withOpenAIToolsBackend(
+  config: OpenAIConfig = {},
+): SmartFormFillerFeature {
   return {
     ɵproviders: [
       { provide: OPEN_AI_CONFIG, useValue: config },
@@ -44,7 +47,9 @@ export function withOpenAIToolsBackend(config: OpenAIConfig): SmartFormFillerFea
   };
 }
 
-export function withWebLLMBackend(config: WebLLMConfig = {}): SmartFormFillerFeature {
+export function withWebLLMBackend(
+  config: WebLLMConfig = {},
+): SmartFormFillerFeature {
   return {
     ɵproviders: [
       { provide: WEB_LLM_CONFIG, useValue: config },
