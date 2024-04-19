@@ -1,19 +1,24 @@
 import { Routes } from '@angular/router';
+import { Demo1Component } from './pages/demo-1/demo-1.component';
+import { Demo2Component } from './pages/demo-2/demo-2.component';
 import { DemoPasteComponent } from './pages/demo-paste/demo-paste.component';
-import { PasteComponent } from './pages/paste/paste.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'paste',
+    redirectTo: 'demo-paste',
     pathMatch: 'full',
-  },
-  {
-    path: 'paste',
-    component: PasteComponent,
   },
   {
     path: 'demo-paste',
     component: DemoPasteComponent,
+  },
+  {
+    path: 'demo-1',
+    component: Demo1Component,
+  },
+  {
+    path: 'demo-2',
+    component: Demo2Component,
   },
 ];

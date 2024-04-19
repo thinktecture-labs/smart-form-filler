@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PasteComponent } from './paste.component';
+import { Demo2Component } from './demo-2.component';
 
-describe('PasteComponent', () => {
-  let component: PasteComponent;
-  let fixture: ComponentFixture<PasteComponent>;
+describe('Demo2Component', () => {
+  let component: Demo2Component;
+  let fixture: ComponentFixture<Demo2Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PasteComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(PasteComponent);
+      imports: [Demo2Component],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(Demo2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
