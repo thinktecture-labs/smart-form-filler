@@ -14,10 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideSmartFormFiller(
-      withOpenAIBackend({
-        baseURL: `${location.origin}/api/groq/openai/v1`,
-        model: 'mixtral-8x7b-32768',
-      }),
+      withOpenAIBackend(),
       // withCustomPromptHandler(EnglishTextPromptHandler),
     ),
     provideHttpClient(),

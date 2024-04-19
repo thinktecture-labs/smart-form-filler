@@ -26,7 +26,7 @@ export function provideSmartFormFiller(
   ]);
 }
 
-export function withOpenAIBackend(config: OpenAIConfig): SmartFormFillerFeature {
+export function withOpenAIBackend(config: OpenAIConfig = {}): SmartFormFillerFeature {
   return {
     ɵproviders: [
       { provide: OPEN_AI_CONFIG, useValue: config },
@@ -36,7 +36,7 @@ export function withOpenAIBackend(config: OpenAIConfig): SmartFormFillerFeature 
   };
 }
 
-export function withOpenAIToolsBackend(config: OpenAIConfig): SmartFormFillerFeature {
+export function withOpenAIToolsBackend(config: OpenAIConfig = {}): SmartFormFillerFeature {
   return {
     ɵproviders: [
       { provide: OPEN_AI_CONFIG, useValue: config },
