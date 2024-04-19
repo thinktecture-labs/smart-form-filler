@@ -1,0 +1,50 @@
+:host {
+  display: block;
+  margin: 2rem;
+}
+
+.model-select {
+  display: flex;
+  justify-content: end;
+}
+
+.group {
+  display: flex;
+  gap: 2rem;
+}
+
+.segment {
+  flex: 1;
+}
+
+mat-form-field,
+mat-checkbox,
+mat-radio-group {
+  display: block;
+}
+
+mat-radio-group,
+mat-checkbox {
+  height: 3.5rem;
+  margin-block-end: 1.375rem;
+  display: flex;
+  align-items: center;
+}
+
+button {
+  margin-block-end: 1rem;
+  margin-inline-end: 1rem;
+}
+
+.spinning {
+  animation: spin 3s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
+}
