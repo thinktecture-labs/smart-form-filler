@@ -1,0 +1,141 @@
+<div class="model-select">
+  <mat-form-field>
+    <mat-label>Inferenz-Modell</mat-label>
+    <mat-select [(value)]="model">
+      @for (model of models; track model) {
+        <mat-option [value]="$index">{{ model.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div>
+  <form class="group" [formGroup]="formGroup">
+    <div class="segment">
+      <mat-form-field>
+        <mat-label>Vorname</mat-label>
+        <input matInput formControlName="firstName" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nachname</mat-label>
+        <input matInput formControlName="lastName" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Firma</mat-label>
+        <input matInput formControlName="company" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Telefonnummer</mat-label>
+        <input matInput formControlName="phoneNumber" />
+      </mat-form-field>
+    </div>
+    <div class="segment">
+      <mat-form-field>
+        <mat-label>Addresszeile 1</mat-label>
+        <input matInput formControlName="addressLine1" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Adresszeile 2</mat-label>
+        <input matInput formControlName="addressLine2" />
+      </mat-form-field>
+      <div class="group">
+        <div class="segment">
+          <mat-form-field>
+            <mat-label>Stadt</mat-label>
+            <input matInput formControlName="city" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Bundesland / -staat</mat-label>
+            <input matInput formControlName="state" />
+          </mat-form-field>
+        </div>
+        <div class="segment">
+          <mat-form-field>
+            <mat-label>Postleitzahl</mat-label>
+            <input matInput formControlName="zip" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Land</mat-label>
+            <input matInput formControlName="country" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div>
+    <button
+      (click)="paste()"
+      mat-button
+      color="primary"
+      mat-raised-button
+      [disabled]="inferencing()"
+    >
+      @if (inferencing()) {
+        <mat-icon class="spinning">refresh</mat-icon>
+      } @else {
+        <mat-icon>content_paste</mat-icon>
+      }
+
+      Einfügen
+    </button>
+
+    <button (click)="formGroup.reset()" mat-button mat-stroked-button>
+      Clear
+    </button>
+  </div>
+
+  <div class="group">
+    <div class="segment">
+      <mat-form-field>
+        <textarea cdkTextareaAutosize matInput>
+Verónica Ortíz
+PROLONGACION 3A NO109
+EJIDO 20 DE NOVIEMBRE
+Tamaulipas
+Matamoros
+87394
+México
+
+Phone 768.312-5495</textarea
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="segment">
+      <mat-form-field>
+        <textarea cdkTextareaAutosize matInput>
+Write to us at:
+Kidwelly Town Council
+Council Offices
+Hillfield Villas
+Kidwelly
+Carmarthenshire
+SA17 4UL
+
+Telephone: 01554 890203
+E-mail: towncouncil@kidwelly.gov.uk</textarea
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="segment">
+      <button
+        (click)="listen()"
+        mat-button
+        color="primary"
+        mat-raised-button
+        [disabled]="inferencing()"
+      >
+        <mat-icon>{{ listening() ? "stop_circle" : "mic" }}</mat-icon>
+        {{ listening() ? "Fertig" : "Spracherkennung" }}
+      </button>
+
+      <mat-form-field>
+        <textarea cdkTextareaAutosize matInput readonly>{{
+          transcribedText()
+        }}</textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
