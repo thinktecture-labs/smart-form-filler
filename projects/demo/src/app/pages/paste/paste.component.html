@@ -1,3 +1,14 @@
+<div class="model-select">
+  <mat-form-field>
+    <mat-label>Inferenz-Modell</mat-label>
+    <mat-select [(value)]="model">
+      @for (model of models; track model) {
+        <mat-option [value]="$index">{{ model.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+
 <form class="group" [formGroup]="formGroup">
   <div class="segment">
     <mat-form-field>
@@ -80,7 +91,7 @@
   </div>
 </form>
 
-<div class="buttons">
+<div>
   <button
     (click)="paste()"
     mat-button

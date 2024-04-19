@@ -3,6 +3,11 @@
   margin: 2rem;
 }
 
+.model-select {
+  display: flex;
+  justify-content: end;
+}
+
 .group {
   display: flex;
   gap: 2rem;
