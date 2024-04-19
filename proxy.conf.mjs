@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 export default {
-  "/api/groq/openai/v1": {
+  "/api/groq/openai/v1/chat/completions": {
     target: "https://api.groq.com",
     pathRewrite: {
       "^/api/groq": "",
