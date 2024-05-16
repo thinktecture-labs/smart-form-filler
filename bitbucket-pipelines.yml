@@ -1,0 +1,15 @@
+pipelines:
+  branches:
+    develop: # TODO auto tag? also tag develop builds as beta
+      - step:
+          name: Install + Quality Check + Build # TODO split steps
+          image: node:20
+          caches:
+            - node
+          script: # Consider if checking demo and blocking build due to that is worth it?
+            - npm ci
+            - npx prettier --check -u .
+            - npx ng lint
+            - npx ng build smart-form-filler
+          artifacts:
+            - dist/**
