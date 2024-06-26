@@ -11,4 +11,6 @@ export { CompletedFormField } from './lib/completed-form-field';
 export { InferenceOptions } from './lib/inference-options';
 
 // Provider functions
-export { provideSmartFormFiller, withOpenAIBackend, withOpenAIToolsBackend, withWebLLMBackend } from './lib/providers';
+export {
+    provideSmartFormFiller, withOpenAIBackend, withOpenAIToolsBackend, withWebLLMBackend, withBuiltInAiBackend,
+} from './lib/providers';

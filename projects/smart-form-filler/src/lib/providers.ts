@@ -1,6 +1,7 @@
 // noinspection JSNonASCIINames,NonAsciiCharacters
 
 import { EnvironmentProviders, makeEnvironmentProviders, Provider } from '@angular/core';
+import { BuiltInAiBackend } from './backends/built-in-ai-backend';
 import { ModelBackend } from './backends/model-backend';
 import { OpenAIBackend } from './backends/open-ai-backend';
 import { OPEN_AI_CONFIG, OpenAIConfig } from './backends/open-ai-config';
@@ -48,6 +49,15 @@ export function withWebLLMBackend(config: WebLLMConfig = {}): SmartFormFillerFea
     ɵproviders: [
       { provide: WEB_LLM_CONFIG, useValue: config },
       { provide: ModelBackend, useClass: WebLLMBackend },
+      { provide: PromptHandler, useClass: TextPromptHandler },
+    ],
+  };
+}
+
+export function withBuiltInAiBackend(): SmartFormFillerFeature {
+  return {
+    ɵproviders: [
+      { provide: ModelBackend, useClass: BuiltInAiBackend },
       { provide: PromptHandler, useClass: TextPromptHandler },
     ],
   };
