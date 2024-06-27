@@ -72,23 +72,23 @@ export class Demo2Component {
   private readonly fields = this.formFiller.getFormFieldsFromFormGroup(
     this.formGroup,
     {
-      date: 'Datum der Inspektion (im Format yyyy-mm-dd)',
-      make: 'Marke des inspizierten Autos',
-      model: 'Modell des inspizierten Autos',
-      licensePlate: 'Kennzeichen des inspizierten Autos',
-      mileage: 'Kilometerstand (Einheit: km)',
+      date: 'Date of the inspection (format: yyyy-mm-dd)',
+      make: 'Make of the inspected car',
+      model: 'Model of the inspected car',
+      licensePlate: 'License plate of the inspected car',
+      mileage: 'Mileage (unit: km)',
       tireType:
-        'Reifentyp (Optionen: "Sommerreifen", "Winterreifen", "Allwetterreifen")',
-      treadDepthFrontLeft: 'Reifenprofiltiefe vorne links (Einheit: mm)',
-      treadDepthFrontRight: 'Reifenprofiltiefe vorne rechts (Einheit: mm)',
-      treadDepthRearLeft: 'Reifenprofiltiefe hinten links (Einheit: mm)',
-      treadDepthRearRight: 'Reifenprofiltiefe hinten rechts (Einheit: mm)',
-      stoneChipInWindshield: 'Ob es einen Steinschlag in der Frontscheibe gibt',
+        'Tire type (options: "summer tires", "winter tires", "all-weather tires")',
+      treadDepthFrontLeft: 'Tire tread depth front left (unit: mm)',
+      treadDepthFrontRight: 'Tire tread depth front right (unit: mm)',
+      treadDepthRearLeft: 'Tire tread depth rear left (unit: mm)',
+      treadDepthRearRight: 'Tire tread depth reat right (unit: mm)',
+      stoneChipInWindshield: 'Whether there is a stone chip in the windshield',
       stoneChipInWindshieldWithCracking:
-        'Ob sich um den Steinschlag in der Frontscheibe ein Riss bildet',
+        'Whether there is a crack around the stone chip in the windshield',
       stoneChipInWindshieldViewingArea:
-        'Ob sich der Steinschlag in der Frontscheibe im Sichtbereich des Fahrers befindet',
-      notes: 'Sonstige Anmerkungen',
+        'Whether the stone chip in the windshield is in the driver\'s viewing area',
+      notes: 'Other notes',
     },
   );
 

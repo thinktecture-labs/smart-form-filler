@@ -68,16 +68,16 @@ export class Demo1Component {
   private readonly fields = this.formFiller.getFormFieldsFromFormGroup(
     this.formGroup,
     {
-      firstName: 'Vorname',
-      lastName: 'Nachname',
-      company: 'Name der Firma, nicht Name der Gruppe oder der Abteilung',
-      phoneNumber: 'Telefonnummer mit Ländercode',
-      addressLine1: 'Addresszeile 1',
-      addressLine2: 'Addresszeile 2',
-      city: 'Stadt',
-      state: 'Bundesland oder Bundesstaat',
-      zip: 'Postleitzahl',
-      country: 'Land',
+      firstName: 'First name',
+      lastName: 'Last name',
+      company: 'Name of the company, not name of the group or division',
+      phoneNumber: 'Phone number with country code',
+      addressLine1: 'Address line 1',
+      addressLine2: 'Address line 2',
+      city: 'City',
+      state: 'State',
+      zip: 'Zip Code',
+      country: 'Country',
     },
   );
 

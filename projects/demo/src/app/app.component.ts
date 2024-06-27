@@ -14,4 +14,14 @@ export class AppComponent {
   constructor() {
     inject(MatIconRegistry).setDefaultFontSetClass('material-symbols-outlined');
   }
+
+  async ngOnInit() {
+    if (!('ai' in window)) {
+      return alert('Prompt API is not available. Demo will not work.');
+    }
+
+    if (await window.ai!.canCreateTextSession() === 'no') {
+      return alert('Prompt API is available, but canCreateTextSession() reported "no". Demo will not work.');
+    }
+  }
 }

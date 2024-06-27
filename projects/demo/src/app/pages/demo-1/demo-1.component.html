@@ -1,10 +1,8 @@
 <div class="model-select">
   <mat-form-field>
-    <mat-label>Inferenz-Modell</mat-label>
-    <mat-select [(value)]="model">
-      @for (model of models; track model) {
-        <mat-option [value]="$index">{{ model.label }}</mat-option>
-      }
+    <mat-label>Inference Model</mat-label>
+    <mat-select value="1" disabled>
+        <mat-option value="1">Prompt API</mat-option>
     </mat-select>
   </mat-form-field>
 </div>
@@ -13,49 +11,49 @@
   <form class="group" [formGroup]="formGroup">
     <div class="segment">
       <mat-form-field>
-        <mat-label>Vorname</mat-label>
+        <mat-label>First Name</mat-label>
         <input matInput formControlName="firstName" />
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Nachname</mat-label>
+        <mat-label>Last Name</mat-label>
         <input matInput formControlName="lastName" />
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Firma</mat-label>
+        <mat-label>Company</mat-label>
         <input matInput formControlName="company" />
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Telefonnummer</mat-label>
+        <mat-label>Phone Number</mat-label>
         <input matInput formControlName="phoneNumber" />
       </mat-form-field>
     </div>
     <div class="segment">
       <mat-form-field>
-        <mat-label>Addresszeile 1</mat-label>
+        <mat-label>Address Line 1</mat-label>
         <input matInput formControlName="addressLine1" />
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Adresszeile 2</mat-label>
+        <mat-label>Address Line 2</mat-label>
         <input matInput formControlName="addressLine2" />
       </mat-form-field>
       <div class="group">
         <div class="segment">
           <mat-form-field>
-            <mat-label>Stadt</mat-label>
+            <mat-label>City</mat-label>
             <input matInput formControlName="city" />
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Bundesland / -staat</mat-label>
+            <mat-label>State</mat-label>
             <input matInput formControlName="state" />
           </mat-form-field>
         </div>
         <div class="segment">
           <mat-form-field>
-            <mat-label>Postleitzahl</mat-label>
+            <mat-label>ZIP</mat-label>
             <input matInput formControlName="zip" />
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Land</mat-label>
+            <mat-label>Country</mat-label>
             <input matInput formControlName="country" />
           </mat-form-field>
         </div>
@@ -77,11 +75,11 @@
         <mat-icon>content_paste</mat-icon>
       }
 
-      Einfügen
+      Paste
     </button>
 
     <button (click)="formGroup.reset()" mat-button mat-stroked-button>
-      Zurücksetzen
+      Reset
     </button>
   </div>
 
@@ -128,7 +126,7 @@ E-mail: towncouncil@kidwelly.gov.uk</textarea
         [disabled]="inferencing()"
       >
         <mat-icon>{{ listening() ? "stop_circle" : "mic" }}</mat-icon>
-        {{ listening() ? "Fertig" : "Spracherkennung" }}
+        {{ listening() ? "Done" : "Start Dictation (OpenAI Whisper)" }}
       </button>
 
       <mat-form-field>
