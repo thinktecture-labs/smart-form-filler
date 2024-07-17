@@ -26,7 +26,8 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/demo/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "webWorkerTsConfig": "projects/demo/tsconfig.worker.json"
           },
           "configurations": {
             "production": {
@@ -86,7 +87,8 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/demo/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "webWorkerTsConfig": "projects/demo/tsconfig.worker.json"
           }
         }
       }

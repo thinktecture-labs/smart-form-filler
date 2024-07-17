@@ -1,15 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, InjectionToken, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SpeechRecognitionBackend } from './backends/speech-recognition-backend';
 
-export const TRANSCRIPTION_URL = new InjectionToken<string>(
-  'Transcription URL',
-);
-
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AudioRecordingService {
-  private readonly httpClient = inject(HttpClient);
-  private readonly transcriptionUrl = inject(TRANSCRIPTION_URL);
+  private readonly speechRecognitionBackend = inject(SpeechRecognitionBackend);
   private mediaRecorder: MediaRecorder | undefined;
   private audioChunks: Blob[] = [];
   private stream?: MediaStream;
@@ -46,13 +41,6 @@ export class AudioRecordingService {
   }
 
   transcribe(audioBlob: Blob): Observable<{ text: string }> {
-    const formData = new FormData();
-    formData.append('model', 'whisper-1');
-    formData.append('file', audioBlob);
-
-    return this.httpClient.post<{ text: string }>(
-      this.transcriptionUrl,
-      formData,
-    );
+    return this.speechRecognitionBackend.transcribe(audioBlob);
   }
 }
