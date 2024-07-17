@@ -1,7 +1,7 @@
 // noinspection JSNonASCIINames,NonAsciiCharacters
 
 import { EnvironmentProviders, makeEnvironmentProviders, Provider } from '@angular/core';
-import { AudioRecordingService } from './audio-recording.service';
+import { SpeechRecognitionService } from './speech-recognition.service';
 import { OpenAIWhisperBackend, TRANSCRIPTION_URL } from './backends/open-ai-whisper-backend';
 import { SpeechRecognitionBackend } from './backends/speech-recognition-backend';
 import { WhisperWebBackend } from './backends/whisper-web-backend';
@@ -13,7 +13,7 @@ interface AudioRecordingFeature {
 export function provideAudioRecording(
     feature: AudioRecordingFeature,
 ): EnvironmentProviders {
-    return makeEnvironmentProviders([AudioRecordingService, feature.ɵproviders]);
+    return makeEnvironmentProviders([SpeechRecognitionService, feature.ɵproviders]);
 }
 
 export function withOpenAIWhisperBackend(transcriptionUrl: string): AudioRecordingFeature {

@@ -10,7 +10,7 @@ import { routes } from './app.routes';
 import {
   provideAudioRecording,
   withWhisperWebBackend,
-} from './audio-recording/providers';
+} from './speech-recognition/providers';
 
 export const appConfig: ApplicationConfig = {
   providers: [

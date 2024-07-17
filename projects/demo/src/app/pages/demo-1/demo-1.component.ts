@@ -11,7 +11,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { firstValueFrom } from 'rxjs';
 import { SmartFormFiller } from '../../../../../smart-form-filler/src/public-api';
-import { AudioRecordingService } from '../../audio-recording/audio-recording.service';
+import { SpeechRecognitionService } from '../../speech-recognition/speech-recognition.service';
 
 @Component({
   selector: 'app-demo-1',
@@ -34,7 +34,7 @@ import { AudioRecordingService } from '../../audio-recording/audio-recording.ser
 export class Demo1Component {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly formFiller = inject(SmartFormFiller);
-  private readonly audioRecordingService = inject(AudioRecordingService);
+  private readonly speechRecognitionService = inject(SpeechRecognitionService);
 
   protected readonly inferencing = signal(false);
   protected readonly listening = signal(false);
@@ -93,7 +93,7 @@ export class Demo1Component {
   async listen(): Promise<void> {
     if (!this.listening()) {
       this.listening.set(true);
-      await this.audioRecordingService.startRecording();
+      await this.speechRecognitionService.startRecording();
       return;
     }
 
@@ -101,9 +101,9 @@ export class Demo1Component {
     this.inferencing.set(true);
 
     try {
-      const blob = await this.audioRecordingService.stopRecording();
+      const blob = await this.speechRecognitionService.stopRecording();
       const response = await firstValueFrom(
-        this.audioRecordingService.transcribe(blob),
+        this.speechRecognitionService.transcribe(blob),
       );
       this.transcribedText.set(response.text);
       this.fillForm(response.text);

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { SpeechRecognitionBackend } from './backends/speech-recognition-backend';
 
 @Injectable()
-export class AudioRecordingService {
+export class SpeechRecognitionService {
   private readonly speechRecognitionBackend = inject(SpeechRecognitionBackend);
   private mediaRecorder: MediaRecorder | undefined;
   private audioChunks: Blob[] = [];
