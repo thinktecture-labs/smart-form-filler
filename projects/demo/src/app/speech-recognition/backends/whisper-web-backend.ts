@@ -9,7 +9,7 @@ export class WhisperWebBackend implements SpeechRecognitionBackend {
 
     transcribe(audioBlob: Blob): Observable<{ text: string }> {
         return from(this.getAudioBufferFromBlob(audioBlob)).pipe(
-            map(audioBuffer => this.extractSingleChannel(audioBuffer)),
+            map(audioBuffer => this.combineStereoToMono(audioBuffer)),
             tap(audio => this.worker.postMessage({
                 audio,
                 model: 'Xenova/whisper-base',
@@ -31,14 +31,12 @@ export class WhisperWebBackend implements SpeechRecognitionBackend {
         return await audioContext.decodeAudioData(arrayBuffer);
     }
 
-    private extractSingleChannel(audioBuffer: AudioBuffer): Float32Array {
     // https://github.com/xenova/whisper-web/blob/4bfdb731c7ec17e82b828753b94f5b3edb5b2756/src/hooks/useTranscriber.ts#L151-L165
+    private combineStereoToMono(audioBuffer: AudioBuffer): Float32Array {
         if (audioBuffer.numberOfChannels === 2) {
             const SCALING_FACTOR = Math.sqrt(2);
-
             const left = audioBuffer.getChannelData(0);
             const right = audioBuffer.getChannelData(1);
-
             const audio = new Float32Array(left.length);
             for (let i = 0; i < audioBuffer.length; ++i) {
                 audio[i] = SCALING_FACTOR * (left[i] + right[i]) / 2;
