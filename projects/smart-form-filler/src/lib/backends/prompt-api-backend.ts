@@ -4,7 +4,7 @@ import { TextParams } from '../prompt-handler/text-prompt-handler';
 import { ModelBackend } from './model-backend';
 
 @Injectable()
-export class BuiltInAiBackend implements ModelBackend<TextParams> {
+export class PromptAPIBackend implements ModelBackend<TextParams> {
     async generate(params: TextParams, options?: InferenceOptions): Promise<string> {
         const defaults = await window.ai!.defaultTextSessionOptions();
         const session = await window.ai!.createTextSession({
