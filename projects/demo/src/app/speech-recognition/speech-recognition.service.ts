@@ -40,6 +40,7 @@ export class SpeechRecognitionService {
     });
   }
 
+  // TODO: Streaming support
   transcribe(audioBlob: Blob): Observable<{ text: string }> {
     return this.speechRecognitionBackend.transcribe(audioBlob);
   }
