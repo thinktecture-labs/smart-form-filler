@@ -32,6 +32,7 @@ export class WhisperWebBackend implements SpeechRecognitionBackend {
     }
 
     private extractSingleChannel(audioBuffer: AudioBuffer): Float32Array {
+    // https://github.com/xenova/whisper-web/blob/4bfdb731c7ec17e82b828753b94f5b3edb5b2756/src/hooks/useTranscriber.ts#L151-L165
         if (audioBuffer.numberOfChannels === 2) {
             const SCALING_FACTOR = Math.sqrt(2);
 
