@@ -16,18 +16,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "paths": {
-      "smart-form-filler": [
-        "./dist/smart-form-filler"
-      ]
+      "@thinktecture/smart-form-filler": ["./projects/smart-form-filler/src/public-api"]
     },
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
