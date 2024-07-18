@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  margin: 2rem;
+}
+
+.group {
+  display: flex;
+  gap: 2rem;
+}
+
+.segment {
+  flex: 1;
+}
+
+mat-form-field {
+  display: block;
+}
+
+.buttons {
+  text-align: center;
+  margin-block: 2rem;
+}
+
+.spinning {
+  animation: spin 3s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
+}
