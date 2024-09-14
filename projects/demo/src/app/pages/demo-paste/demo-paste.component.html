@@ -54,9 +54,9 @@
 <div class="buttons">
   <button (click)="onPaste()" mat-button color="primary" mat-raised-button>
     @if (inferenceInProgress()) {
-      <mat-icon class="spinning" svgIcon="spinner"></mat-icon>
+      <mat-icon class="spinning">sync</mat-icon>
     } @else {
-      <mat-icon svgIcon="smart_paste"></mat-icon>
+      <mat-icon fontIcon="content_paste"></mat-icon>
     }
 
     Paste
