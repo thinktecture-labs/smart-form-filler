@@ -20,8 +20,9 @@ export class AppComponent {
       return alert('Prompt API is not available. Demo will not work.');
     }
 
-    if (await window.ai!.canCreateTextSession() === 'no') {
-      return alert('Prompt API is available, but canCreateTextSession() reported "no". Demo will not work.');
+    const capabilities = await window.ai.assistant.capabilities();
+    if (capabilities.available === 'no') {
+      return alert('Prompt API is available, but the device or browser does not support prompting a language model. Demo will not work.');
     }
   }
 }

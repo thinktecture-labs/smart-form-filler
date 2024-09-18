@@ -31,6 +31,7 @@
     "@angular-devkit/build-angular": "^18.1.1",
     "@angular/cli": "^18.1.1",
     "@angular/compiler-cli": "^18.1.1",
+    "@types/dom-chromium-ai": "^0.0.0",
     "@types/jasmine": "~5.1.0",
     "dotenv": "^16.4.5",
     "jasmine-core": "~5.1.0",
