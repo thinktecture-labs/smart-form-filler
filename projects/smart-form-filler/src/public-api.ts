@@ -12,5 +12,5 @@ export { InferenceOptions } from './lib/inference-options';
 
 // Provider functions
 export {
-    provideSmartFormFiller, withOpenAIBackend, withOpenAIToolsBackend, withWebLLMBackend, withPromptAPIBackend,
+    provideSmartFormFiller, withOpenAIBackend, withOpenAIToolsBackend, /*withWebLLMBackend,*/ withPromptAPIBackend,
 } from './lib/providers';

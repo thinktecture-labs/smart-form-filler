@@ -9,7 +9,7 @@ export default {
     changeOrigin: true,
     bypass(req) {
       req.headers["authorization"] = `Bearer ${process.env.GROQ_API_KEY}`;
-    },
+    }
   },
   "/api/mistral/v1/chat/completions": {
     target: "https://api.mistral.ai",
@@ -19,7 +19,7 @@ export default {
     changeOrigin: true,
     bypass(req) {
       req.headers["authorization"] = `Bearer ${process.env.MISTRAL_API_KEY}`;
-    },
+    }
   },
   "/api/openai/v1/audio/transcriptions": {
     target: "https://api.openai.com",
@@ -29,6 +29,6 @@ export default {
     changeOrigin: true,
     bypass(req) {
       req.headers["authorization"] = `Bearer ${process.env.OPENAI_API_KEY}`;
-    },
-  },
+    }
+  }
 };
