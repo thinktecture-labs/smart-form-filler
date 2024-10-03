@@ -9,14 +9,13 @@
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="demo-paste">Paste</a>
       <a
         mat-list-item
         routerLink="demo-1"
         routerLinkActive
         #demo1="routerLinkActive"
         [activated]="demo1.isActive"
-        >Demo 1</a
+        >Contact information</a
       >
       <a
         mat-list-item
@@ -24,7 +23,7 @@
         routerLinkActive
         #demo2="routerLinkActive"
         [activated]="demo2.isActive"
-        >Demo 2</a
+        >Damage assessment</a
       >
     </mat-nav-list>
   </mat-sidenav>
@@ -40,7 +39,7 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
       }
-      <span>Angular Forms Companion</span>
+      <span>Angular Smart Form Filler</span>
     </mat-toolbar>
     <router-outlet />
   </mat-sidenav-content>

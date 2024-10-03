@@ -1,12 +1,15 @@
-<div class="model-select">
-  <mat-form-field>
-    <mat-label>Inferenz-Modell</mat-label>
-    <mat-select [(value)]="model">
-      @for (model of models; track model) {
-        <mat-option [value]="$index">{{ model.label }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+<div class="header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+  <h2 style="margin: 0;">Damage Assessment</h2>
+  <div class="model-select">
+    <mat-form-field>
+      <mat-label>Inferenz-Modell</mat-label>
+      <mat-select [(value)]="model">
+        @for (model of models; track model) {
+          <mat-option [value]="$index">{{ model.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
 </div>
 
 <form class="group" [formGroup]="formGroup">
