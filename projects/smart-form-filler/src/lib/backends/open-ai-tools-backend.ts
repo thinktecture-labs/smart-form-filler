@@ -16,12 +16,35 @@ export class OpenAIToolsBackend implements ModelBackend<JsonToolParams> {
   });
 
   async generate(params: JsonToolParams, options?: InferenceOptions): Promise<string | null | undefined> {
-    const runner = this.openAI.beta.chat.completions.runTools({
+    let openAI = this.openAI;
+    if (options?.baseURL !== undefined) {
+      openAI = new OpenAI({
+        baseURL: options.baseURL,
+        apiKey: 'FAKE',
+        dangerouslyAllowBrowser: true,
+      });
+    }
+
+    const runner = openAI.beta.chat.completions.runTools({
       ...params,
       model: options?.model ?? this.config.model ?? defaultConfig.model,
       temperature: options?.temperature ?? 0,
     });
+    
     const response = await runner.finalChatCompletion();
-    return response.choices[0].message.tool_calls?.[0]?.function.arguments;
+    const args = response.choices[0].message.tool_calls?.[0]?.function.arguments;
+    
+    if (args) {
+      try {
+        const parsedArguments = JSON.parse(args);
+        if (parsedArguments.properties) {
+          return JSON.stringify(parsedArguments.properties);
+        }
+      } catch (error) {
+        console.error('Error parsing return arguments:', error);
+      }
+    }
+    
+    return null;
   }
 }

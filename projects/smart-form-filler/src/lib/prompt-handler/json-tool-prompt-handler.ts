@@ -38,7 +38,6 @@ export class JsonToolPromptHandler extends PromptHandler<JsonToolParams> {
   }
 
   private generateSystemMessage(): string {
-    // TODO: Descriptions are not added yet!
     const currentDate = new Date().toLocaleDateString('en-US', {
       weekday: 'long',
       year: 'numeric',
@@ -56,14 +55,18 @@ Do not explain how the values were determined.`;
   }
 
   private getResponseJsonSchema(fields: FormField[]): { [key: string]: JSONSchemaDefinition } {
-    return fields.reduce((prev, { key, type }) => {
-      prev[key] = { type };
+    return fields.reduce((prev, { key, description, type }) => {
+      prev[key] = {
+        type,
+        description: description ?? `The ${key} of type ${type}`,
+      };
       return prev;
-    }, {} as { [key: string]: { type: string } })
+    }, {} as { [key: string]: JSONSchemaDefinition });
   }
 
   override parseResponse(response: string): CompletedFormField[] {
     return Object.entries(JSON.parse(response))
+      .filter(([, value]) => value !== null)
       .map(([key, value]) => ({ key, value }));
   }
 }
