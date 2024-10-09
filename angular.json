@@ -23,7 +23,7 @@
               "projects/demo/src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "projects/demo/src/styles.css"
             ],
             "scripts": []
