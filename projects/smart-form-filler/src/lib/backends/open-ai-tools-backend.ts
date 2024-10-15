@@ -38,7 +38,11 @@ export class OpenAIToolsBackend implements ModelBackend<JsonToolParams> {
       try {
         const parsedArguments = JSON.parse(args);
         if (parsedArguments.properties) {
+          // Case 1: Response with 'properties' object
           return JSON.stringify(parsedArguments.properties);
+        } else {
+          // Case 2: Response without 'properties' object
+          return JSON.stringify(parsedArguments);
         }
       } catch (error) {
         console.error('Error parsing return arguments:', error);
