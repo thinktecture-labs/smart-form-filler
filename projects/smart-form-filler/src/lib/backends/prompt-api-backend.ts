@@ -6,8 +6,8 @@ import { ModelBackend } from './model-backend';
 @Injectable()
 export class PromptAPIBackend implements ModelBackend<TextParams> {
     async generate(params: TextParams, options?: InferenceOptions): Promise<string> {
-        const defaults = await window.ai.assistant.capabilities();
-        const session = await window.ai.assistant.create({
+        const defaults = await window.ai.languageModel.capabilities();
+        const session = await window.ai.languageModel.create({
             temperature: options?.temperature ?? defaults.defaultTemperature ?? undefined,
             topK: defaults.defaultTopK ?? undefined,
         });
