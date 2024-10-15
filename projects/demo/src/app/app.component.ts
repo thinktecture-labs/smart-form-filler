@@ -20,7 +20,7 @@ export class AppComponent {
       return alert('Prompt API is not available. Demo will not work.');
     }
 
-    const capabilities = await window.ai.assistant.capabilities();
+    const capabilities = await window.ai.languageModel.capabilities();
     if (capabilities.available === 'no') {
       return alert('Prompt API is available, but the device or browser does not support prompting a language model. Demo will not work.');
     }
