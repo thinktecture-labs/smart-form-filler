@@ -41,15 +41,15 @@ export class Demo2Component {
   protected readonly transcribedText = signal('');
   protected readonly models = [
     {
-      label: 'Mixtral 7B (Groq)',
-      endpoint: 'groq/openai/v1',
-      model: 'mixtral-8x7b-32768',
+      label: 'gpt 4.1 mini (Open AI)',
+      endpoint: 'openai/v1',
+      model: 'gpt-4.1-mini',
     },
     {
-      label: 'Mistral Small',
-      endpoint: 'mistral/v1',
-      model: 'mistral-small-latest',
-    },
+      label: 'gpt 4.1 nano (Open AI)',
+      endpoint: 'openai/v1',
+      model: 'gpt-4.1-nano',
+    }
   ];
   protected readonly model = model(0);
   protected readonly formGroup = this.fb.group({
@@ -72,23 +72,23 @@ export class Demo2Component {
   private readonly fields = this.formFiller.getFormFieldsFromFormGroup(
     this.formGroup,
     {
-      date: 'Datum der Inspektion (im Format yyyy-mm-dd)',
-      make: 'Marke des inspizierten Autos',
-      model: 'Modell des inspizierten Autos',
-      licensePlate: 'Kennzeichen des inspizierten Autos',
-      mileage: 'Kilometerstand (Einheit: km)',
+      date: 'Date of investigation (in yyyy-mm-dd)',
+      make: 'Make of car under investigation',
+      model: 'Model of car under investigation',
+      licensePlate: 'License plate of car under investigation',
+      mileage: 'Mileage (unit: km)',
       tireType:
-        'Reifentyp (Optionen: "Sommerreifen", "Winterreifen", "Allwetterreifen")',
-      treadDepthFrontLeft: 'Reifenprofiltiefe vorne links (Einheit: mm)',
-      treadDepthFrontRight: 'Reifenprofiltiefe vorne rechts (Einheit: mm)',
-      treadDepthRearLeft: 'Reifenprofiltiefe hinten links (Einheit: mm)',
-      treadDepthRearRight: 'Reifenprofiltiefe hinten rechts (Einheit: mm)',
-      stoneChipInWindshield: 'Ob es einen Steinschlag in der Frontscheibe gibt',
+        'Type of tire (options: "Summer tires", "Winter tires", "All-weather tires")',
+      treadDepthFrontLeft: 'Tread depth front left (unit: mm)',
+      treadDepthFrontRight: 'Tread depth front right (unit: mm)',
+      treadDepthRearLeft: 'Tread depth rear left (unit: mm)',
+      treadDepthRearRight: 'Tread depth rear right (unit: mm)',
+      stoneChipInWindshield: 'Whether there is a stone chip in the windshield',
       stoneChipInWindshieldWithCracking:
-        'Ob sich um den Steinschlag in der Frontscheibe ein Riss bildet',
+        'Whether there is a crack in the windshield around the stone chip',
       stoneChipInWindshieldViewingArea:
-        'Ob sich der Steinschlag in der Frontscheibe im Sichtbereich des Fahrers befindet',
-      notes: 'Sonstige Anmerkungen',
+        'Whether the stone chip in the windshield is in the viewing area',
+      notes: 'Notes',
     },
   );
 

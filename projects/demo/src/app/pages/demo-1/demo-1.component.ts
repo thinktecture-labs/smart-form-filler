@@ -41,15 +41,10 @@ export class Demo1Component {
   protected readonly transcribedText = signal('');
   protected readonly models = [
     {
-      label: 'Mixtral 7B (Groq)',
-      endpoint: 'groq/openai/v1',
-      model: 'mixtral-8x7b-32768',
-    },
-    {
-      label: 'Mistral Small',
-      endpoint: 'mistral/v1',
-      model: 'mistral-small-latest',
-    },
+      label: 'gpt 4.1 mini (Open AI)',
+      endpoint: 'openai/v1',
+      model: 'gpt-4.1-mini',
+    }
   ];
   protected readonly model = model(0);
   protected readonly formGroup = this.fb.group({

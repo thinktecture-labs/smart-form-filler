@@ -1,6 +1,16 @@
 import 'dotenv/config';
 
 export default {
+  "/api/openai/v1/chat/completions": {
+    target: "https://api.openai.com",
+    pathRewrite: {
+      "^/api/openai": "",
+    },
+    changeOrigin: true,
+    bypass(req) {
+      req.headers["authorization"] = `Bearer ${process.env.OPENAI_API_KEY}`;
+    }
+  },
   "/api/groq/openai/v1/chat/completions": {
     target: "https://api.groq.com",
     pathRewrite: {

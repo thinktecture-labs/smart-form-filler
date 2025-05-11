@@ -2,7 +2,7 @@
   <h2 style="margin: 0;">Damage Assessment</h2>
   <div class="model-select">
     <mat-form-field>
-      <mat-label>Inferenz-Modell</mat-label>
+      <mat-label>Inference model</mat-label>
       <mat-select [(value)]="model">
         @for (model of models; track model) {
           <mat-option [value]="$index">{{ model.label }}</mat-option>
@@ -15,53 +15,53 @@
 <form class="group" [formGroup]="formGroup">
   <div class="segment">
     <mat-form-field>
-      <mat-label>Datum der Untersuchung</mat-label>
+      <mat-label>Date of investigation</mat-label>
       <input matInput [matDatepicker]="datepicker" formControlName="date" />
       <mat-datepicker-toggle matIconSuffix [for]="datepicker" />
       <mat-datepicker #datepicker />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Hersteller</mat-label>
+      <mat-label>Make</mat-label>
       <input matInput formControlName="make" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Modell</mat-label>
+      <mat-label>Model</mat-label>
       <input matInput formControlName="model" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Kennzeichen</mat-label>
+      <mat-label>License plate</mat-label>
       <input matInput formControlName="licensePlate" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Kilometerstand</mat-label>
+      <mat-label>Mileage</mat-label>
       <input matInput formControlName="mileage" type="number" />
       <span matTextSuffix>km</span>
     </mat-form-field>
   </div>
   <div class="segment">
     <mat-radio-group formControlName="tireType">
-      <mat-radio-button value="Sommerreifen">Sommerreifen</mat-radio-button>
-      <mat-radio-button value="Winterreifen">Winterreifen</mat-radio-button>
-      <mat-radio-button value="Allwetterreifen">
-        Allwetterreifen
+      <mat-radio-button value="Summer tires">Summer tires</mat-radio-button>
+      <mat-radio-button value="Winter tires">Winter tires</mat-radio-button>
+      <mat-radio-button value="All-weather tires">  
+        All-weather tires
       </mat-radio-button>
     </mat-radio-group>
     <div class="group">
       <div class="segment">
         <mat-form-field>
-          <mat-label>Profiltiefe vorne links</mat-label>
+          <mat-label>Tread depth front left</mat-label>
           <input matInput formControlName="treadDepthFrontLeft" type="number" />
           <span matTextSuffix>mm</span>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Profiltiefe hinten links</mat-label>
+          <mat-label>Tread depth rear left</mat-label>
           <input matInput formControlName="treadDepthRearLeft" type="number" />
           <span matTextSuffix>mm</span>
         </mat-form-field>
       </div>
       <div class="segment">
         <mat-form-field>
-          <mat-label>Profiltiefe vorne rechts</mat-label>
+          <mat-label>Tread depth front right</mat-label>
           <input
             matInput
             formControlName="treadDepthFrontRight"
@@ -70,7 +70,7 @@
           <span matTextSuffix>mm</span>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Profiltiefe hinten rechts</mat-label>
+          <mat-label>Tread depth rear right</mat-label>
           <input matInput formControlName="treadDepthRearRight" type="number" />
           <span matTextSuffix>mm</span>
         </mat-form-field>
@@ -78,17 +78,17 @@
     </div>
     <div class="group">
       <mat-checkbox formControlName="stoneChipInWindshield">
-        Steinschlag Frontscheibe
+        Stone chip in windshield
       </mat-checkbox>
       <mat-checkbox formControlName="stoneChipInWindshieldWithCracking">
-        Rissbildung
+        With cracking
       </mat-checkbox>
       <mat-checkbox formControlName="stoneChipInWindshieldViewingArea">
-        Im Sichtbereich
+        In viewing area
       </mat-checkbox>
     </div>
     <mat-form-field>
-      <mat-label>Anmerkungen</mat-label>
+      <mat-label>Notes</mat-label>
       <input matInput formControlName="notes" />
     </mat-form-field>
   </div>
@@ -108,11 +108,11 @@
       <mat-icon>content_paste</mat-icon>
     }
 
-    Einfügen
+    Paste
   </button>
 
   <button (click)="formGroup.reset()" mat-button mat-stroked-button>
-    Zurücksetzen
+    Reset
   </button>
 </div>
 
@@ -152,7 +152,7 @@ In der Windschutzscheibe fällt mir ein Steinschlag auf, der sich im Sichtfeld b
       [disabled]="inferencing()"
     >
       <mat-icon>{{ listening() ? "stop_circle" : "mic" }}</mat-icon>
-      {{ listening() ? "Fertig" : "Spracherkennung" }}
+      {{ listening() ? "Done" : "Speech recognition" }}
     </button>
 
     <mat-form-field>
