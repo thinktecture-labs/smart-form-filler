@@ -1,26 +1,28 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter } from '@angular/router';
 import {
   provideSmartFormFiller,
   withOpenAIBackend,
 } from '../../../smart-form-filler/src/public-api';
-import { routes } from './app.routes';
-import { TRANSCRIPTION_URL } from './audio-recording/audio-recording.service';
+import { TRANSCRIPTION_CONFIG } from './audio-recording/audio-recording.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
     provideAnimationsAsync(),
     provideSmartFormFiller(
-      withOpenAIBackend(),
-      // withCustomPromptHandler(EnglishTextPromptHandler),
+      withOpenAIBackend({
+        baseURL: `${location.origin}/api/openai/v1`,
+        model: 'Mistral-Small-3.2-24B-Instruct-2506',
+      }),
     ),
     provideHttpClient(),
     {
-      provide: TRANSCRIPTION_URL,
-      useValue: `${location.origin}/api/openai/v1/audio/transcriptions`,
+      provide: TRANSCRIPTION_CONFIG,
+      useValue: {
+        baseURL: `${location.origin}/api/openai/v1/audio/transcriptions`,
+        model: 'whisper-large-v3',
+      },
     },
   ],
 };

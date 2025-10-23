@@ -2,14 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, InjectionToken, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export const TRANSCRIPTION_URL = new InjectionToken<string>(
-  'Transcription URL',
-);
+interface TranscriptionConfig {
+  baseURL: string;
+  model: string;
+}
+
+export const TRANSCRIPTION_CONFIG = new InjectionToken<TranscriptionConfig>('Transcription config');
 
 @Injectable({ providedIn: 'root' })
 export class AudioRecordingService {
   private readonly httpClient = inject(HttpClient);
-  private readonly transcriptionUrl = inject(TRANSCRIPTION_URL);
+  private readonly transcriptionConfig = inject(TRANSCRIPTION_CONFIG);
   private mediaRecorder: MediaRecorder | undefined;
   private audioChunks: Blob[] = [];
   private stream?: MediaStream;
@@ -19,7 +22,7 @@ export class AudioRecordingService {
     try {
       this.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       this.mediaRecorder = new MediaRecorder(this.stream);
-      this.mediaRecorder.addEventListener('dataavailable', (event) =>
+      this.mediaRecorder.addEventListener('dataavailable', event =>
         this.audioChunks.push(event.data),
       );
       this.mediaRecorder.addEventListener('error', () =>
@@ -32,7 +35,7 @@ export class AudioRecordingService {
   }
 
   stopRecording(): Promise<Blob> {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       if (this.mediaRecorder) {
         this.mediaRecorder.addEventListener('stop', () => {
           const audioBlob = new Blob(this.audioChunks, { type: 'audio/mp4' });
@@ -40,19 +43,16 @@ export class AudioRecordingService {
           resolve(audioBlob);
         });
         this.mediaRecorder.stop();
-        this.stream?.getTracks().forEach((track) => track.stop());
+        this.stream?.getTracks().forEach(track => track.stop());
       }
     });
   }
 
   transcribe(audioBlob: Blob): Observable<{ text: string }> {
     const formData = new FormData();
-    formData.append('model', 'whisper-1');
+    formData.append('model', this.transcriptionConfig.model);
     formData.append('file', audioBlob);
 
-    return this.httpClient.post<{ text: string }>(
-      this.transcriptionUrl,
-      formData,
-    );
+    return this.httpClient.post<{ text: string }>(this.transcriptionConfig.baseURL, formData);
   }
 }

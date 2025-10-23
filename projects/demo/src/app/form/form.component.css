@@ -1,11 +1,14 @@
 :host {
-  display: block;
-  margin: 2rem;
+  display: flex;
+  justify-content: center;
 }
 
-.model-select {
+.container {
+  max-width: 40rem;
+  margin: 2rem;
   display: flex;
-  justify-content: end;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .group {
@@ -15,12 +18,8 @@
 
 .segment {
   flex: 1;
-}
-
-mat-form-field,
-mat-checkbox,
-mat-radio-group {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 mat-radio-group,
@@ -31,9 +30,9 @@ mat-checkbox {
   align-items: center;
 }
 
-button {
-  margin-block-end: 1rem;
-  margin-inline-end: 1rem;
+.description textarea {
+  height: calc(3 * 4.75rem - 1.5rem - 0.5rem - 1.25rem);
+  resize: none;
 }
 
 .spinning {

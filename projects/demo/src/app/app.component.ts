@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
-import { RouterOutlet } from '@angular/router';
-import { NavComponent } from './nav/nav.component';
+import { FormComponent } from './form/form.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavComponent],
+  imports: [FormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

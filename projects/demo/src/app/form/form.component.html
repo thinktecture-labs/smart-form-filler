@@ -1,0 +1,68 @@
+<div class="container">
+  <form class="group" [formGroup]="formGroup">
+    <div class="segment">
+      <mat-form-field>
+        <mat-label>Datum</mat-label>
+        <input matInput [matDatepicker]="datepicker" formControlName="date" />
+        <mat-datepicker-toggle matIconSuffix [for]="datepicker" />
+        <mat-datepicker #datepicker />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Sprecher</mat-label>
+        <input matInput formControlName="speaker" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+
+      <mat-radio-group formControlName="tag">
+        <mat-radio-button value="HTMLCSS">HTML / CSS</mat-radio-button>
+        <mat-radio-button value="Angular">Angular</mat-radio-button>
+        <mat-radio-button value="GenAI">Gen AI</mat-radio-button>
+        <mat-radio-button value="Vue">Vue</mat-radio-button>
+        <mat-radio-button value="NodeJS">Node.js</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-form-field class="description">
+        <mat-label>Beschreibung</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <mat-radio-group formControlName="level">
+        <mat-radio-button value="beginner">Anfänger</mat-radio-button>
+        <mat-radio-button value="intermediate">Mittelstufe</mat-radio-button>
+        <mat-radio-button value="advanced">Fortgeschrittene</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </form>
+
+  <div class="group">
+    <button (click)="fill(text())" mat-raised-button [disabled]="inferencing() || listening()">
+      @if (inferencing()) {
+        <mat-icon class="spinning">refresh</mat-icon>
+      } @else {
+        <mat-icon>wand_stars</mat-icon>
+      }
+
+      Ausfüllen
+    </button>
+
+    <button (click)="formGroup.reset()" mat-raised-button>Zurücksetzen</button>
+
+    <button (click)="listenAndFill()" mat-raised-button [disabled]="inferencing()">
+      <mat-icon>{{ listening() ? 'stop_circle' : 'mic' }}</mat-icon>
+      {{ listening() ? 'Fertig' : 'Spracherkennung' }}
+    </button>
+  </div>
+
+  <div class="group">
+    <div class="segment">
+      <mat-form-field>
+        <textarea cdkTextareaAutosize matInput [(ngModel)]="text"> </textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
