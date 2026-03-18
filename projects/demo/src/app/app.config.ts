@@ -11,7 +11,10 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
     provideSmartFormFiller(
-      withOpenAIBackend(),
+      withOpenAIBackend({
+        baseURL: `${location.origin}/api/openai/v1`,
+        model: 'gpt-5.4-mini',
+      }),
       // withCustomPromptHandler(EnglishTextPromptHandler),
     ),
     provideHttpClient(),
