@@ -15,12 +15,11 @@ export class WebLLMBackend implements ModelBackend<TextParams> {
     this.resetModel();
   }
 
-  async generate({ messages, stop }: TextParams, options?: InferenceOptions): Promise<string> {
+  async generate({ messages }: TextParams, options?: InferenceOptions): Promise<string> {
     await this.resetModel(options);
 
     return this.chatModule.generate(messages, undefined, undefined, {
       temperature: options?.temperature,
-      stop,
     });
   }
 
@@ -28,13 +27,9 @@ export class WebLLMBackend implements ModelBackend<TextParams> {
     // TODO: Fix re-entry if reloading is underway
     const targetModel = options?.model ?? this.config.model ?? defaultConfig.model;
     if (this.loadedModel !== targetModel) {
-      await this.chatModule.reload(
-        targetModel,
-        undefined,
-        {
-          model_list: this.config.modelList ?? defaultConfig.modelList,
-        },
-      );
+      await this.chatModule.reload(targetModel, undefined, {
+        model_list: this.config.modelList ?? defaultConfig.modelList,
+      });
       this.loadedModel = targetModel;
     } else {
       await this.chatModule.resetChat();

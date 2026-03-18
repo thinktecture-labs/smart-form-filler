@@ -4,11 +4,7 @@ import { FormField } from '../form-field';
 import { PromptHandler } from './prompt-handler';
 
 export interface TextParams {
-  messages: [
-    { content: string; role: 'system' },
-    { content: string; role: 'user' },
-  ];
-  stop: string;
+  messages: [{ content: string; role: 'system' }, { content: string; role: 'user' }];
 }
 
 @Injectable()
@@ -19,7 +15,6 @@ export class EnglishTextPromptHandler extends PromptHandler<TextParams> {
         { content: this.generateSystemMessage(fields), role: 'system' },
         { content: this.generateUserMessage(userData), role: 'user' },
       ],
-      stop: 'END_RESPONSE',
     };
   }
 
@@ -32,8 +27,7 @@ export class EnglishTextPromptHandler extends PromptHandler<TextParams> {
     });
     const fieldString = fields
       .map(
-        ({ key, description, type }) =>
-          `FIELD ${key}^^^The ${description ?? key} of type ${type}`,
+        ({ key, description, type }) => `FIELD ${key}^^^The ${description ?? key} of type ${type}`,
       )
       .join('\n');
 
@@ -44,7 +38,7 @@ FIELD identifier^^^value
 
 Give a response with the following lines only, with values inferred from USER_DATA:
 
-${fieldString}END_RESPONSE
+${fieldString}
 
 Do not explain how the values were determined.
 For fields without any corresponding information in USER_DATA, use value NO_DATA.
@@ -58,13 +52,12 @@ For fields without any corresponding information in USER_DATA, use value NO_DATA
   override parseResponse(response: string): CompletedFormField[] {
     return response
       .split('\n')
-      .map((resultLine) => {
+      .map(resultLine => {
         // For compatibility with OpenAI-compatible local models (which may behave differently than GPT-3.5), this regex
         // a) ignores any whitespace before the first FIELD, as local models may add it
         // b) accepts at least three circumflex (^) characters, as local models may return more
         // c) omits the END_RESPONSE stop word, as local models may return it
-        const [, key, value] =
-          /\s*FIELD\s(.*?)\^{3,}(.*?)(END_RESPONSE)?$/g.exec(resultLine) ?? [];
+        const [, key, value] = /\s*FIELD\s(.*?)\^{3,}(.*?)(END_RESPONSE)?$/g.exec(resultLine) ?? [];
         return { key, value };
       })
       .filter(({ value }) => value !== 'NO_DATA');
