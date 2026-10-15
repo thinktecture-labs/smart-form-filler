@@ -58,6 +58,10 @@
     </button>
   </div>
 
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
   <div class="group">
     <div class="segment">
       <mat-form-field>

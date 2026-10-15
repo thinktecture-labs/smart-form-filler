@@ -35,6 +35,11 @@ mat-checkbox {
   resize: none;
 }
 
+.error {
+  margin: 0;
+  color: #b3261e;
+}
+
 .spinning {
   animation: spin 3s infinite linear;
 }
