@@ -1,19 +1,10 @@
 import 'dotenv/config';
 
+// OVH AI Endpoints, OpenAI-compatible: /v1/chat/completions and /v1/audio/transcriptions
+// on one host; the model is selected per request.
 export default {
-  '/api/openai/v1/chat/completions': {
-    target:
-      'https://mistral-small-3-2-24b-instruct-2506.endpoints.kepler.ai.cloud.ovh.net/api/openai_compat',
-    pathRewrite: {
-      '^/api/openai': '',
-    },
-    changeOrigin: true,
-    bypass(req) {
-      req.headers['authorization'] = `Bearer ${process.env.OVH_API_KEY}`;
-    },
-  },
-  '/api/openai/v1/audio/transcriptions': {
-    target: 'https://whisper-large-v3.endpoints.kepler.ai.cloud.ovh.net/api/openai_compat',
+  '/api/openai': {
+    target: 'https://oai.endpoints.kepler.ai.cloud.ovh.net',
     pathRewrite: {
       '^/api/openai': '',
     },
