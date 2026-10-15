@@ -37,6 +37,11 @@ button {
   margin-inline-end: 1rem;
 }
 
+.error {
+  margin: 0;
+  color: #b3261e;
+}
+
 .spinning {
   animation: spin 3s infinite linear;
 }
